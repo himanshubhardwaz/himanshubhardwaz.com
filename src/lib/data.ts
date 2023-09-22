@@ -91,7 +91,7 @@ export const projects = [
 	},
 	{
 		title: 'react-use-form-validate',
-		isFeatured: true,
+		isFeatured: false,
 		thumbnail:
 			'https://opengraph.githubassets.com/aa55e4a45c75a3d72a3fbe1791116ffc8c01cb32d6846e991f70d7d93939f2a7/himanshubhardwaz/react-use-form-validate',
 		liveUrl: 'https://www.npmjs.com/package/react-use-form-validate',

@@ -1,6 +1,6 @@
-import type { PageServerLoad } from './$types';
+import type { LayoutServerLoad } from './$types';
 
-export const load: PageServerLoad = async () => {
+export const load: LayoutServerLoad = async () => {
 	const url = `https://api.github.com/repos/himanshubhardwaz/blogs/contents/`;
 
 	const headers = new Headers();
