@@ -26,7 +26,7 @@
                 </a>
                 <a
                     aria-label="Social Media"
-                    href="https://www.aedin.com/in/himanshubhardwaz/"
+                    href="https://www.linkedin.com/in/himanshubhardwaz/"
                     target="_blank"
                     class="footer-icons border border-white p-3 rounded-md text-white"
                 >

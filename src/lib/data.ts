@@ -5,7 +5,10 @@ export const experiences = [
 		position: 'SDE',
 		name: 'SaaS Labs · Full-time',
 		location: 'Palo Alto, California, United States · Remote',
-		description: []
+		description: [
+			'- Developed the JustCall Global Search feature using React.js, Tailwind CSS, and TypeScript for the frontend, and Node.js with Algolia for the backend.',
+			'- Enhanced user experience by enabling efficient product and help arFcle searches on JustCall.'
+		]
 	},
 	{
 		startDate: 'Aug 2021',

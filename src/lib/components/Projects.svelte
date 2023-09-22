@@ -3,7 +3,7 @@
     import {projects} from '$lib/data';
 
     export let title: string;
-    export let onlyShowFeatured: boolean;
+    export let onlyShowFeatured: boolean = false;
 </script>
 
 <section class="my-16">
