@@ -1,3 +1,82 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    --tw-bg-opacity: 1;
+    --tw-text-opacity: 1;
+    background-color: rgb(17 17 17 / var(--tw-bg-opacity));
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+/* gradient heading */
+.main-heading {
+    display: inline-block;
+    margin: 2rem 0;
+    font-style: normal;
+    font-weight: 600;
+    background: linear-gradient(89.81deg, #9845e8 -1.72%, #33d2ff 54.05%, #dd5789 99.78%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    background-size: 150% 150%;
+    animation: gradient 15s ease infinite;
+    line-height: 1.2;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@layer components {
+    .container {
+        @apply max-w-[1112px] mx-auto;
+    }
+
+    h1 {
+        @apply text-3xl sm:text-4xl;
+    }
+
+    h2 {
+        @apply text-2xl font-semibold;
+    }
+
+    h3 {
+        @apply text-xl font-semibold;
+    }
+
+    /*p,
+  li,
+  .footer-icons {
+    @apply flex items-center p-4 rounded-lg justify-center;
+  }*/
+}
+
+@layer utilities {
+    @variants responsive {
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+    }
+}
