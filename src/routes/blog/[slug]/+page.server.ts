@@ -1,9 +1,7 @@
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ params }) => {
-	const url = `https://api.github.com/repos/himanshubhardwaz/blogs/contents/${params.slug}.md`;
-
-	console.log({ url });
+export const load: PageServerLoad = async ({ params: { slug } }) => {
+	const url = `https://api.github.com/repos/himanshubhardwaz/blogs/contents/${slug}.md`;
 
 	const headers = new Headers();
 
