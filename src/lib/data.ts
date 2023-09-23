@@ -1,7 +1,7 @@
 export const experiences = [
 	{
-		startDate: 'Aug 2021',
-		endDate: 'Mar 2023',
+		startDate: 'June 2023',
+		endDate: 'Current',
 		position: 'SDE',
 		name: 'SaaS Labs · Full-time',
 		location: 'Palo Alto, California, United States · Remote',

@@ -1,4 +1,5 @@
 import type { PageServerLoad } from './$types';
+import { error } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ params: { slug } }) => {
 	const url = `https://api.github.com/repos/himanshubhardwaz/blogs/contents/${slug}.md`;
@@ -7,18 +8,15 @@ export const load: PageServerLoad = async ({ params: { slug } }) => {
 
 	headers.append('Authorization', `Bearer ${import.meta.env.VITE_GITHUB_ACCESS_TOKEN}`);
 
-	try {
-		const response = await fetch(url, { headers });
+	const response = await fetch(url, { headers });
 
-		if (response.ok) {
-			const data: { content: string } = await response.json();
-			const content = atob(data.content);
-			return { content };
-		} else {
-			throw new Error(`Failed to fetch blog: ${response.status}`);
-		}
-	} catch (error) {
-		console.log({ errorMain: error });
-		throw new Error('Could not fetch this blog!');
+	if (response.ok) {
+		const data: { content: string } = await response.json();
+		const content = atob(data.content);
+		return { content };
 	}
+
+	throw error(404, {
+		message: 'Blog not found'
+	});
 };
