@@ -1,17 +1,7 @@
 <script lang="ts">
 	import type { LayoutData } from "./$types";
 
-    const getTitleFromBlogName = (blogName: string) => {
-        const splits = blogName.split(".");
-        let title = splits[0].replace(/-/g, " ");
-        title = title.replace(/\b\w/g, (l) => l.toUpperCase());
-        return title;
-    };
-
-    const getBlogSlug = (blogName: string) => {
-        const splits = blogName.split(".");
-        return splits[0];
-    };
+    import { getBlogSlug, getTitleFromBlog } from "$lib/utils";
 
     export let data: LayoutData
 </script>
@@ -25,7 +15,7 @@
                         {index + 1}
                         {". "}
                         <a href={`/blog/${getBlogSlug(blog)}`}>
-                            {getTitleFromBlogName(blog)}
+                            {getTitleFromBlog(blog)}
                         </a>
                     </li>
                 {/each}
