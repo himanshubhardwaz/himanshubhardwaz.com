@@ -6,6 +6,8 @@
 
 <main class="container max-w-6xl px-4 min-h-screen no-scrollbar">
     <Navbar />
-    <slot />
+    <section class="min-h-[calc(100vh-210px)] sm:min-h-[calc(100vh-270px)]">
+      <slot />
+    </section>
     <Footer />
 </main>
