@@ -76,7 +76,7 @@
                             <p>Tech Stack: </p>
                             <ul class="flex gap-1 flex-wrap">
                                 {#each project?.techStack as techstack, index}
-                                    <li>{techstack}{index !== project.techStack.length - 1 && ", "}</li>
+                                    <li>{techstack}{index !== project.techStack.length - 1 ? ", " : ""}</li>
                                 {/each}
                             </ul>
                         </div>

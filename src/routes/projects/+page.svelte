@@ -9,4 +9,4 @@
 
 
 <h1 class="main-heading text-7xl">Projects</h1>
-<Projects title="Projects"/>
+<Projects />
