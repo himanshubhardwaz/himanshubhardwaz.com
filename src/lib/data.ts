@@ -1,13 +1,13 @@
 export const experiences = [
 	{
-		startDate: 'June 2023',
+		startDate: 'July 2023',
 		endDate: 'Current',
 		position: 'SDE',
 		name: 'SaaS Labs · Full-time',
 		location: 'Palo Alto, California, United States · Remote',
 		description: [
-			'- Developed the JustCall Global Search feature using React.js, Tailwind CSS, and TypeScript for the frontend, and Node.js with Algolia for the backend.',
-			'- Enhanced user experience by enabling efficient product and help arFcle searches on JustCall.'
+			'-  Engineered the JustCall Global Search feature, utilizing React.js, Tailwind CSS, and TypeScript for the frontend, and Node.js with Algolia for the backend. Additionally, designed and implemented custom scrapers for help articles and blogs, incorporating OpenAI for generating searchable tags. This enhancement resulted in a streamlined search process, facilitating over 3000 daily searches and significantly improving user accessibility',
+			'-  Developed and deployed a widely adopted meeting automation bot for Zoom and Google Meet, used by over 5000 monthly users to attend and record meetings, using puppeteer, Node.js and TypeScript..'
 		]
 	},
 	{
@@ -17,11 +17,8 @@ export const experiences = [
 		name: 'SaaS Labs · Internship',
 		location: 'Palo Alto, California, United States · Remote',
 		description: [
-			'- Responsible for development of two separate web applications using React.js from scratch.',
-			'- Boosted application performance by 15% following best practices such as lazy-loading, infinite-scroll, debounce,code splitting and other performance optimisations.',
-			'- Designed and develop a matchmaking algorithm using socket.io and Twilio.',
-			'- Contributed in developing and maintaining apis for the application using Node.js(Express)',
-			'- Created reusable functional components and custom hooks for web applications and performed Error handling using Error Boundaries'
+			'- Led the development and maintenance of suits of five web application suites using React.js, Next.js, and Node.js.',
+			'- Demonstrated full-stack proficiency and achieved a 32% performance improvement through optimisation techniques such as lazy-loading, infinite-scroll, debounce, and code splitting'
 		]
 	},
 	{
@@ -42,8 +39,8 @@ export const experiences = [
 		name: 'Lets Endorse · Internship',
 		location: 'Banglore, Karnataka, India · Remote',
 		description: [
-			'- Built an end-to-end admin module, which allows admin to select a particular area on a map, add or delete coordinates using a form or clicking on the map, save related data, using React and Google Maps JavaScript API.',
-			'- Designed required Schemas in Mongodb, and created required APIs in Node.js following RESTful API Conventions..'
+			'- Developed an end-to-end full-stack (MERN) admin module using React and the Google Maps JavaScript API, enabling seamless area selection and data storage for over 200 administrators at LetsEndorse.',
+			'- Implemented efficient caching strategies during the migration from Redux to React-Query, resulting in a notable 20% improvement in application performance.'
 		]
 	}
 ];
