@@ -18,6 +18,11 @@
                     Projects
                 </a>
             </li>
+             <li>
+                <a class="p-4 dark:text-light block text-lg" href="https://himanshubhardwaz.github.io/resume/Himanshu's_Resume.pdf" target="_blank">
+                    Resume
+                </a>
+            </li>
             <li>
                 <a class="p-4 dark:text-light block text-lg" href="/blog">
                     Blogs
