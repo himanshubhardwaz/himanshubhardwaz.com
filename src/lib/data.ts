@@ -2,7 +2,7 @@ export const experiences = [
 	{
 		startDate: 'July 2023',
 		endDate: 'Current',
-		position: 'SDE',
+		position: 'SDE-1',
 		name: 'SaaS Labs · Full-time',
 		location: 'Palo Alto, California, United States · Remote',
 		description: [
@@ -13,7 +13,7 @@ export const experiences = [
 	{
 		startDate: 'Aug 2021',
 		endDate: 'Mar 2023',
-		position: 'SDE',
+		position: 'SDE Intern',
 		name: 'SaaS Labs · Internship',
 		location: 'Palo Alto, California, United States · Remote',
 		description: [
@@ -35,7 +35,7 @@ export const experiences = [
 	{
 		startDate: 'Jun 2021',
 		endDate: 'July 2021',
-		position: 'Full stack engineer',
+		position: 'Full Stack Engineer Intern',
 		name: 'Lets Endorse · Internship',
 		location: 'Banglore, Karnataka, India · Remote',
 		description: [
