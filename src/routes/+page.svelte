@@ -11,4 +11,4 @@
 
 <Hero />
 <Experience />
-<Projects title="Featured Projects" onlyShowFeatured={true} />
+<Projects onlyShowFeatured={true} />
