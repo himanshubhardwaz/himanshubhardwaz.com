@@ -40,11 +40,16 @@ FROM base
 # Copy built application
 COPY --from=build /app /app
 
+# Copy and run start-script
+COPY /scripts /app/scripts
+RUN chmod +x /app/scripts/start-fly.sh
+
 # Setup sqlite3 on a separate volume
-RUN mkdir -p /data
-VOLUME /data
+RUN mkdir -p /database
+VOLUME /database
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-ENV DATABASE_URL="file:///data/sqlite.db"
-CMD [ "npm", "run", "start" ]
+ENV DATABASE_URL="file:///database/sqlite.db"
+CMD [ "sh", "-c", "/app/scripts/test.sh && npm run start" ]
+
