@@ -20,6 +20,9 @@ FROM base as build
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential node-gyp pkg-config python-is-python3
 
+# Install SQLite
+RUN apt-get install -y sqlite3
+
 # Install node modules
 COPY --link .npmrc package-lock.json package.json ./
 RUN npm ci --include=dev
@@ -36,6 +39,10 @@ RUN npm prune --omit=dev
 
 # Final stage for app image
 FROM base
+
+# Install SQLite in the final image
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y sqlite3
 
 # Copy built application
 COPY --from=build /app /app
