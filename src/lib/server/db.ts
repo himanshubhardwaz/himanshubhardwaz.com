@@ -7,7 +7,7 @@ export const getDB = async () => {
 	try {
 		if (!database) {
 			database = await open({
-				filename: process.env.DATABASE_URL as string,
+				filename: process.env.VITE_DB_FILE_PATH as string,
 				driver: sqlite3.Database
 			});
 
