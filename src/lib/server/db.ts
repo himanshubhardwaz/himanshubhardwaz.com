@@ -1,18 +1,13 @@
 import sqlite3 from 'sqlite3';
 import { open, Database } from 'sqlite';
-import fs from 'fs-extra';
-
-const DB_FILE_PATH = './database/analytics.db';
 
 let database: Database | null = null;
 
 export const getDB = async () => {
 	try {
-		await fs.access(DB_FILE_PATH);
-
 		if (!database) {
 			database = await open({
-				filename: DB_FILE_PATH,
+				filename: process.env.VITE_DB_FILE_PATH as string,
 				driver: sqlite3.Database
 			});
 
