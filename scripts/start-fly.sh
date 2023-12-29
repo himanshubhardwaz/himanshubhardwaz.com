@@ -22,3 +22,4 @@ if [ ! -e "$DB_FILE" ]; then
 fi
 
 node -r dotenv/config /app/scripts/start-app.js
+
