@@ -1,27 +1,13 @@
-import sqlite3 from 'sqlite3';
-import { open, Database } from 'sqlite';
+import Database from 'better-sqlite3';
 
-let database: Database | null = null;
+export const db = new Database(process.env.VITE_DB_FILE_PATH as string);
 
-export const getDB = async () => {
-	try {
-		if (!database) {
-			database = await open({
-				filename: process.env.VITE_DB_FILE_PATH as string,
-				driver: sqlite3.Database
-			});
-		}
+db.pragma('journal_mode = WAL');
+db.pragma('case_sensitive_like = false');
 
-		return database;
-	} catch (error) {
-		console.error('Error connecting to the database:', error);
-		throw error;
-	}
-};
-
-export const closeDB = async () => {
-	if (database) {
-		await database.close();
-		database = null;
-	}
-};
+function shutDownSQLite() {
+	console.log('SQLite doing graceful shutdown');
+	db.close();
+}
+process.on('SIGINT', shutDownSQLite);
+process.on('SIGTERM', shutDownSQLite);

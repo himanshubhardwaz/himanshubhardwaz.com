@@ -1,4 +1,4 @@
-import { getDB, closeDB } from '$lib/server/db';
+import { db } from '$lib/server/db';
 
 type PageView = Array<{
 	id: number;
@@ -7,15 +7,11 @@ type PageView = Array<{
 }>;
 
 export const load = async ({ request }) => {
-	const db = await getDB();
-
-	let data: PageView = await db.all(`SELECT * FROM page_views`);
+	let data = db.prepare('SELECT * FROM page_views').all() as unknown[] as PageView;
 
 	data = data.filter(({ route }) => {
 		return new URL(route).origin === new URL(request.url).origin;
 	});
-
-	await closeDB();
 
 	return { data };
 };

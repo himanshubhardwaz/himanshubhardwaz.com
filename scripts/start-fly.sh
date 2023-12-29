@@ -4,13 +4,21 @@
 # This creates or migrates the database on your fly volume and then starts the app
 set -e
 
-FOLDER=/data
-if [ ! -d "$FOLDER" ]
-then
-    echo "$FOLDER is not a directory, initializing database" 
-    mkdir /data
-    touch /data/sqlite.db
+echo "Running start-fly script..."
+
+DATA_FOLDER=/data
+DB_FILE=$DATA_FOLDER/sqlite.db
+SCHEMA_FILE=/app/scripts/schema.sql
+
+if [ ! -d "$DATA_FOLDER" ]; then
+    echo "$DATA_FOLDER is not a directory, initializing database"
+    mkdir "$DATA_FOLDER"
 fi
 
-sqlite3 /data/sqlite.db < /app/scripts/schema.sql
+if [ ! -e "$DB_FILE" ]; then
+    echo "$DB_FILE does not exist, initializing database"
+    touch "$DB_FILE"
+    sqlite3 "$DB_FILE" < "$SCHEMA_FILE"
+fi
+
 node -r dotenv/config /app/scripts/start-app.js

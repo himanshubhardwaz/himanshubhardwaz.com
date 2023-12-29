@@ -1,25 +1,22 @@
-import { getDB, closeDB } from '$lib/server/db';
+import { db } from '$lib/server/db';
 import type { Handle } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	try {
-		const db = await getDB();
-
 		const route = event.url.href;
 
-		await db.run(
+		const stmt = db.prepare(
 			`
-		INSERT INTO page_views (route, count)
-		VALUES (?, 1)
-		ON CONFLICT(route)
-		DO UPDATE SET count = COALESCE(count, 0) + 1;
-		`,
-			[route]
+			INSERT INTO page_views (route, count)
+			VALUES (?, 1)
+			ON CONFLICT(route)
+			DO UPDATE SET count = COALESCE(count, 0) + 1;
+  			`
 		);
 
-		const response = await resolve(event);
+		stmt.run(route);
 
-		await closeDB();
+		const response = await resolve(event);
 
 		return response;
 	} catch (error) {
