@@ -5,7 +5,7 @@ export const load: LayoutServerLoad = async () => {
 
 	const headers = new Headers();
 
-	headers.append('Authorization', `Bearer ${import.meta.env.VITE_GITHUB_ACCESS_TOKEN}`);
+	headers.append('Authorization', `Bearer ${process.env.VITE_GITHUB_ACCESS_TOKEN}`);
 
 	try {
 		const response = await fetch(url, { headers });
