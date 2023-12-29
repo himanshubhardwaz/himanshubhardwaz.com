@@ -10,14 +10,6 @@ export const getDB = async () => {
 				filename: process.env.VITE_DB_FILE_PATH as string,
 				driver: sqlite3.Database
 			});
-
-			await database.run(
-				`CREATE TABLE IF NOT EXISTS page_views (
-				id INTEGER PRIMARY KEY,
-				route TEXT UNIQUE,
-				count INTEGER DEFAULT 0
-				);`
-			);
 		}
 
 		return database;
