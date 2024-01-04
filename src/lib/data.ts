@@ -132,3 +132,142 @@ export const projects = [
 ];
 
 export const featuredProjects = projects.slice(0, 3);
+
+export const techStacks = {
+	frontendDevelopment: {
+		name: 'Frontend Development',
+		image: 'https://simpleicons.org/icons/html5.svg'
+	},
+	backendDevelopment: {
+		name: 'Backend Development',
+		image: 'https://simpleicons.org/icons/node-dot-js.svg'
+	},
+	problemSolving: {
+		name: 'Problem Solving',
+		image: 'https://simpleicons.org/icons/c.svg'
+	},
+	DBMS: {
+		name: 'DBMS',
+		image: 'https://simpleicons.org/icons/mysql.svg'
+	},
+	JavaScriptES6: {
+		name: 'JavaScript (ES6)',
+		image: 'https://simpleicons.org/icons/javascript.svg'
+	},
+	TypeScript: {
+		name: 'TypeScript',
+		image: 'https://simpleicons.org/icons/typescript.svg'
+	},
+	CPlusPlus: {
+		name: 'C++',
+		image: 'https://simpleicons.org/icons/cplusplus.svg'
+	},
+	React: {
+		name: 'React',
+		image: 'https://simpleicons.org/icons/react.svg'
+	},
+	NextJS: {
+		name: 'Next.js',
+		image: 'https://simpleicons.org/icons/next-dot-js.svg'
+	},
+	RemixRun: {
+		name: 'Remix.run',
+		image: 'https://simpleicons.org/icons/remix.svg'
+	},
+	Svelte: {
+		name: 'Svelte',
+		image: 'https://simpleicons.org/icons/svelte.svg'
+	},
+	SvelteKit: {
+		name: 'SvelteKit',
+		image: 'https://simpleicons.org/icons/svelte.svg'
+	},
+	SolidJS: {
+		name: 'SolidJS',
+		image: 'https://simpleicons.org/icons/solidjs.svg'
+	},
+	NestJS: {
+		name: 'NestJS',
+		image: 'https://simpleicons.org/icons/nestjs.svg'
+	},
+	Serverless: {
+		name: 'Serverless',
+		image: 'https://simpleicons.org/icons/serverless.svg'
+	},
+	MySQL: {
+		name: 'MySQL',
+		image: 'https://simpleicons.org/icons/mysql.svg'
+	},
+	Postgres: {
+		name: 'PostgreSQL',
+		image: 'https://simpleicons.org/icons/postgresql.svg'
+	},
+	SQLite: {
+		name: 'SQLite',
+		image: 'https://simpleicons.org/icons/sqlite.svg'
+	},
+	MongoDB: {
+		name: 'MongoDB',
+		image: 'https://simpleicons.org/icons/mongodb.svg'
+	},
+	Redis: {
+		name: 'Redis',
+		image: 'https://simpleicons.org/icons/redis.svg'
+	},
+	NodeJS: {
+		name: 'Node.js',
+		image: 'https://simpleicons.org/icons/node-dot-js.svg'
+	},
+	Express: {
+		name: 'Express',
+		image: 'https://simpleicons.org/icons/express.svg'
+	},
+	Redux: {
+		name: 'Redux',
+		image: 'https://simpleicons.org/icons/redux.svg'
+	},
+	Zustand: {
+		name: 'Zustand',
+		image: 'https://simpleicons.org/icons/zustand.svg'
+	},
+	Zod: {
+		name: 'Zod',
+		image: 'https://simpleicons.org/icons/zod.svg'
+	},
+	Prisma: {
+		name: 'Prisma',
+		image: 'https://simpleicons.org/icons/prisma.svg'
+	},
+	Tailwind: {
+		name: 'Tailwind CSS',
+		image: 'https://simpleicons.org/icons/tailwindcss.svg'
+	},
+	socketIO: {
+		name: 'Socket.IO',
+		image: 'https://simpleicons.org/icons/socket-dot-io.svg'
+	},
+	reactQuery: {
+		name: 'React Query',
+		image: 'https://simpleicons.org/icons/react-query.svg'
+	},
+	Algolia: {
+		name: 'Algolia',
+		image: 'https://simpleicons.org/icons/algolia.svg'
+	},
+	OpenAI: {
+		name: 'OpenAI',
+		image: 'https://simpleicons.org/icons/openai.svg'
+	},
+	puppeteer: {
+		name: 'Puppeteer',
+		image: 'https://simpleicons.org/icons/puppeteer.svg'
+	},
+	MicrosoftAzureComputerVision: {
+		name: 'Microsoft Azure Computer Vision',
+		image: 'https://simpleicons.org/icons/microsoftazure.svg'
+	},
+	codemirror: {
+		name: 'CodeMirror',
+		image: 'https://simpleicons.org/icons/codemirror.svg'
+	}
+};
