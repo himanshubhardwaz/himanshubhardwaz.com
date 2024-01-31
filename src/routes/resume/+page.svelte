@@ -1,11 +1,17 @@
 <script>
-  import { goto } from '$app/navigation';
-  import { onMount } from "svelte"
-  import { RESUME_LINK } from "$lib/constants"
+import {
+    goto
+} from '$app/navigation';
+import {
+    onMount
+} from "svelte"
+import {
+    RESUME_LINK
+} from "$lib/constants"
 
-  onMount(() => {
-      goto(RESUME_LINK);
-  });
+onMount(() => {
+    goto(RESUME_LINK);
+});
 </script>
 
 <svelte:head>
@@ -24,6 +30,5 @@
 </svelte:head>
 
 <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-  Redirecting...
+    Redirecting...
 </div>
-

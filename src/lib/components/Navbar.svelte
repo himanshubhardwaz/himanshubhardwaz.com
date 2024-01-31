@@ -1,10 +1,10 @@
 <script lang="ts">
-    const createLogo = (name: string) =>
+const createLogo = (name: string) =>
     name
-        .split(" ")
-        .map((word) => word[0])
-        .join("")
-        .toUpperCase();
+    .split(" ")
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase();
 </script>
 
 <header class="container flex items-center justify-between h-[80px] sm:h-[123px]">
@@ -18,7 +18,7 @@
                     Projects
                 </a>
             </li>
-             <li>
+            <li>
                 <a class="p-4 dark:text-light block text-lg" href="/resume" target="_blank">
                     Resume
                 </a>
