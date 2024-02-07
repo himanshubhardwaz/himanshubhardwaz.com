@@ -8,7 +8,7 @@ echo "Running start-fly script..."
 
 DATA_FOLDER=/data
 DB_FILE=$DATA_FOLDER/sqlite.db
-SCHEMA_FILE=/app/scripts/schema.sql
+SCHEMA_FILE=/scripts/schema.sql
 
 if [ ! -d "$DATA_FOLDER" ]; then
     echo "$DATA_FOLDER is not a directory, initializing database"
