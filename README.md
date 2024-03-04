@@ -2,8 +2,8 @@
 
 ## Deployed on Fly.io
 
-This is the current README of my portfolio. Below are the tech stacks used:
-
+Below are the tech stacks used:
+ 
 ### Frontend:
 - Svelte
 - Vite
