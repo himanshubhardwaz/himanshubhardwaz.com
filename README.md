@@ -1,5 +1,3 @@
-# My portfolio - re rewritten in svelte
-
 # My Portfolio - Rewritten in Svelte
 
 ## Deployed on Fly.io
