@@ -36,4 +36,6 @@ onMount(() => {
     <meta name="description" content={`Blog: ${data.title} by Himanshu`}>
 </svelte:head>
 
+<!-- <button>Go back</button> -->
+
 <section id="blog-section" />

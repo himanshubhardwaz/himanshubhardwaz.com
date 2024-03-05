@@ -5,7 +5,10 @@ export const load: LayoutServerLoad = async () => {
 
 	const headers = new Headers();
 
-	headers.append('Authorization', `Bearer ${process.env.VITE_GITHUB_ACCESS_TOKEN}`);
+	headers.append(
+		'Authorization',
+		`Bearer ${process.env.VITE_GITHUB_ACCESS_TOKEN ?? import.meta.env.VITE_GITHUB_ACCESS_TOKEN}`
+	);
 
 	try {
 		const response = await fetch(url, { headers });
@@ -18,6 +21,7 @@ export const load: LayoutServerLoad = async () => {
 			throw new Error(`Failed to fetch blogs: ${response.status}`);
 		}
 	} catch (error) {
+		if (error instanceof Error) throw error;
 		throw new Error('Could not fetch blogs!');
 	}
 };
