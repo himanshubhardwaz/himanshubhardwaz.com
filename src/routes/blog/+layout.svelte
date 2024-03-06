@@ -3,7 +3,7 @@
         LayoutData
     } from "./$types";
 
-    import backIcon from "$lib/icons/back.svg?raw"
+    import BackIcon from "$lib/icons/back-icons.svelte"
 
     import {
         getBlogSlug,
@@ -27,8 +27,9 @@
 </script>
 
 {#if !isAllBlogsRoute}
-    <a data-sveltekit-preload-data="hover" href="/blog">
-	   {`<--`} Go back to blogs
+    <a class="flex gap-2" data-sveltekit-preload-data="hover" href="/blog">
+        <span class="icon"><svelte:component this={BackIcon} /></span>
+        <span>Go back to blogs</span>
     </a>
     <br />
 {/if}
