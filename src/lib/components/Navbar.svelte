@@ -14,7 +14,7 @@ const createLogo = (name: string) =>
     <nav>
         <ul class="flex items-center">
             <li>
-                <a class="p-4 dark:text-light block text-lg" href="/projects">
+                <a class="p-4 dark:text-light block text-lg" href="/project">
                     Projects
                 </a>
             </li>

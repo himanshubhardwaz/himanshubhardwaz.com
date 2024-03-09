@@ -3,7 +3,7 @@
         LayoutData
     } from "./$types";
 
-    import BackIcon from "$lib/icons/back-icons.svelte"
+    import BackIcon from "$lib/icons/back.svelte"
 
     import {
         getBlogSlug,

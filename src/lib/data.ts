@@ -48,6 +48,7 @@ export const experiences = [
 export const projects = [
 	{
 		title: 'Dialworks',
+		slug: 'dialworks',
 		isFeatured: true,
 		thumbnail:
 			'https://ik.imagekit.io/q1caodkhg/Portfolio_Statics/dialworks.png?updatedAt=1685343492678',
@@ -68,7 +69,8 @@ export const projects = [
 		]
 	},
 	{
-		title: 'memegeneratorai',
+		title: 'Memegeneratorai',
+		slug: 'memegeneratorai',
 		isFeatured: true,
 		thumbnail:
 			'https://ik.imagekit.io/q1caodkhg/Portfolio_Statics/memegeneratorai.png?updatedAt=1685343477251',
@@ -88,6 +90,7 @@ export const projects = [
 	},
 	{
 		title: 'react-use-form-validate',
+		slug: 'react-use-form-validate',
 		isFeatured: false,
 		thumbnail:
 			'https://opengraph.githubassets.com/aa55e4a45c75a3d72a3fbe1791116ffc8c01cb32d6846e991f70d7d93939f2a7/himanshubhardwaz/react-use-form-validate',
@@ -97,6 +100,7 @@ export const projects = [
 	},
 	{
 		title: 'takepoll',
+		slug: 'takepoll',
 		isFeatured: false,
 		thumbnail:
 			'https://ik.imagekit.io/q1caodkhg/Portfolio_Statics/takepoll.png?updatedAt=1685343783107',
@@ -113,6 +117,7 @@ export const projects = [
 	},
 	{
 		title: 'Chess game',
+		slug: 'chess-game',
 		isFeatured: false,
 		thumbnail:
 			'https://ik.imagekit.io/q1caodkhg/Portfolio_Statics/chess.png?updatedAt=1685343607042',
@@ -122,6 +127,7 @@ export const projects = [
 	},
 	{
 		title: 'create-npm-typescript-package',
+		slug: 'create-npm-typescript-package',
 		isFeatured: false,
 		thumbnail:
 			'https://opengraph.githubassets.com/aa55e4a45c75a3d72a3fbe1791116ffc8c01cb32d6846e991f70d7d93939f2a7/himanshubhardwaz/create-npm-typescript-package',

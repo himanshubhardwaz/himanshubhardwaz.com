@@ -1,18 +1,15 @@
-<!-- TODO -->
-
 <div class="flex items-center justify-center p-12">
-  <!-- Author: FormBold Team -->
-  <!-- Learn More: https://formbold.com -->
   <div class="mx-auto w-full max-w-[550px]">
-    <form action="https://formbold.com/s/FORM_ID" method="POST">
+    <form method="POST">
       <div class="mb-5">
         <label
           for="name"
-          class="mb-3 block text-base font-medium text-[#07074D]"
+          class="mb-3 block text-base font-medium"
         >
           Full Name
         </label>
         <input
+          required
           type="text"
           name="name"
           id="name"
@@ -23,11 +20,12 @@
       <div class="mb-5">
         <label
           for="email"
-          class="mb-3 block text-base font-medium text-[#07074D]"
+          class="mb-3 block text-base font-medium"
         >
           Email Address
         </label>
         <input
+          required
           type="email"
           name="email"
           id="email"
@@ -38,11 +36,13 @@
       <div class="mb-5">
         <label
           for="subject"
-          class="mb-3 block text-base font-medium text-[#07074D]"
+          class="mb-3 block text-base font-medium"
         >
           Subject
         </label>
         <input
+          required
+          min="5"
           type="text"
           name="subject"
           id="subject"
@@ -53,7 +53,7 @@
       <div class="mb-5">
         <label
           for="message"
-          class="mb-3 block text-base font-medium text-[#07074D]"
+          class="mb-3 block text-base font-medium"
         >
           Message
         </label>

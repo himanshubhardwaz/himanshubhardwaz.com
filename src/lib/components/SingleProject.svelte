@@ -5,11 +5,13 @@ export let project: {
     liveUrl: string;
     thumbnail: string;
     title: string;
+    slug: string;
 };
 </script>
 
-<article class="w-full max-h-[25rem] overflow-hidden relative group">
-    <div class="flex items-center absolute right-4  p-4 z-10">
+<article class="w-full max-h-[25rem] overflow-hidden relative group cursor-pointer">
+        <a href={`/project/${project.slug}`}>
+    <!-- <div class="flex items-center absolute right-4  p-4 z-10">
         {#if project.githubUrl}
         <a
             href={project.githubUrl}
@@ -58,18 +60,17 @@ export let project: {
             </svg>
         </a>
         {/if}
-    </div>
+    </div> -->
 
-    <a href={project.liveUrl ? project.liveUrl : project.githubUrl} target="_blank">
-        <img
-            src={project.thumbnail}
-            class="w-full h-a    scale-100 hover:scale-110 transition duration-[1.5s]"
-            loading="lazy"
-            width="100%"
-            height="100%"
-            alt="featureImage"
-            />
-    </a>
+
+    <img
+        src={project.thumbnail}
+        class="w-full h-a    scale-100 hover:scale-110 transition duration-[1.5s]"
+        loading="lazy"
+        width="100%"
+        height="100%"
+        alt="featureImage"
+    />
 
     <div class="absolute w-full inset-0 backdrop-blur-md dark:text-white text-white bg-black/50 p-4 translate-y-[100%] group-hover:translate-y-0 transition duration-700">
         <p class="mr-2 text-xl mb-2">{project.title}</p>
@@ -80,4 +81,5 @@ export let project: {
             {/each}
         </ul>
     </div>
+    </a>
 </article>
