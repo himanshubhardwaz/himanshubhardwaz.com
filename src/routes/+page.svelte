@@ -12,5 +12,4 @@
 
 <Hero />
 <Experience />
-<!-- <Skills /> -->
 <Projects onlyShowFeatured={true} />

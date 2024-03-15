@@ -5,10 +5,15 @@
 
 	import { marked } from "marked";
 	import { onMount } from "svelte";
+    import { page } from '$app/stores'; 
 
     export let data: PageData;
 
+    $: shouldBackToHome = false;
+
     onMount(() => {
+        shouldBackToHome = $page.url.toString().endsWith("rel=homepage")
+
         const projectSection = document.getElementById("project-section");
 
         let projectShadowRoot: ShadowRoot | null = null;
@@ -26,11 +31,13 @@
             projectShadowRoot.appendChild(project);
         }
     })
+
+
 </script>
 
-<a class="flex gap-2" data-sveltekit-preload-data="hover" href="/project">
+<a class="flex gap-2" data-sveltekit-preload-data="hover" href={shouldBackToHome ? "/" : "/project"}>
     <span class="icon"><svelte:component this={BackIcon} /></span>
-    <span>Go back to projects</span>
+    <span>Go back to {shouldBackToHome ? "home" : "projects"}</span>
 </a>
 
 <div class="flex gap-2 my-4">
