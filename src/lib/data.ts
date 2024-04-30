@@ -89,6 +89,17 @@ export const projects = [
 		]
 	},
 	{
+		title: 'Gmeet Auto Mute',
+		slug: 'gmeet-auto-mute',
+		isFeatured: false,
+		thumbnail:
+			'https://opengraph.githubassets.com/aa55e4a45c75a3d72a3fbe1791116ffc8c01cb32d6846e991f70d7d93939f2a7/himanshubhardwaz/gmeet-auto-mute',
+		liveUrl:
+			'https://chromewebstore.google.com/detail/google-meet-auto-mute/ljkbihkcmindjjegbehbaiohgejajbbd',
+		githubUrl: 'https://github.com/himanshubhardwaz/gmeet-auto-mute',
+		techStack: ['TypeScript', 'Webpack', 'Chrome Extension']
+	},
+	{
 		title: 'react-use-form-validate',
 		slug: 'react-use-form-validate',
 		isFeatured: false,
