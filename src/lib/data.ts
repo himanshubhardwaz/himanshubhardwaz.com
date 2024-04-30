@@ -89,6 +89,16 @@ export const projects = [
 		]
 	},
 	{
+		title: 'JustCall Dialer SDK',
+		slug: 'justcall-dialer-sdk',
+		isFeatured: false,
+		thumbnail:
+			'https://opengraph.githubassets.com/aa55e4a45c75a3d72a3fbe1791116ffc8c01cb32d6846e991f70d7d93939f2a7/saaslabsco/justcall-dialer-sdk',
+		liveUrl: 'https://www.npmjs.com/package/@justcall/justcall-dialer-sdk',
+		githubUrl: 'https://github.com/saaslabsco/justcall-dialer-sdk',
+		techStack: ['TypeScript', 'changesets-cli', 'vitest', 'tsup']
+	},
+	{
 		title: 'Gmeet Auto Mute',
 		slug: 'gmeet-auto-mute',
 		isFeatured: false,
