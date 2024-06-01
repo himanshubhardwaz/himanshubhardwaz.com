@@ -74,7 +74,7 @@ export const projects = [
 		isFeatured: true,
 		thumbnail:
 			'https://ik.imagekit.io/q1caodkhg/Portfolio_Statics/memegeneratorai.png?updatedAt=1685343477251',
-		liveUrl: 'https://memegeneratorai.online',
+		liveUrl: 'https://memegenerator.himanshubhardwaz.com',
 		githubUrl: '',
 		techStack: [
 			'remix.run',
