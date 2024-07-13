@@ -17,10 +17,13 @@ FROM base as build
 
 # Install packages needed to build node modules
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential node-gyp pkg-config python-is-python3
+    apt-get install --no-install-recommends -y build-essential node-gyp pkg-config python-is-python3 curl
 
 # Install SQLite
 RUN apt-get install -y sqlite3
+
+# Install pnpm
+RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 
 # Install node modules
 COPY --link .npmrc package.json pnpm-lock.yaml ./
@@ -41,6 +44,9 @@ FROM base
 # Install SQLite in the final image
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y sqlite3
+
+# Install pnpm in the final image
+RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 
 # Copy built application
 COPY --from=build /app /app
