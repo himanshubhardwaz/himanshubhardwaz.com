@@ -12,7 +12,6 @@ WORKDIR /app
 # Set production environment
 ENV NODE_ENV="production"
 
-
 # Throw-away build stage to reduce size of final image
 FROM base as build
 
@@ -24,8 +23,8 @@ RUN apt-get update -qq && \
 RUN apt-get install -y sqlite3
 
 # Install node modules
-COPY --link .npmrc pnpm-lock.yaml package.json ./
-RUN pnpm ci --include=dev
+COPY --link .npmrc package.json pnpm-lock.yaml ./
+RUN pnpm install
 
 # Copy application code
 COPY --link . .
@@ -34,8 +33,7 @@ COPY --link . .
 RUN mkdir /data && pnpm run build
 
 # Remove development dependencies
-RUN pnpm prune --omit=dev
-
+RUN pnpm prune --prod
 
 # Final stage for app image
 FROM base
