@@ -12,6 +12,7 @@ WORKDIR /app
 # Set production environment
 ENV NODE_ENV="production"
 
+
 # Throw-away build stage to reduce size of final image
 FROM base as build
 
@@ -27,7 +28,7 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 
 # Install node modules
 COPY --link .npmrc package.json pnpm-lock.yaml ./
-RUN pnpm install
+RUN pnpm install --frozen-lockfile
 
 # Copy application code
 COPY --link . .
@@ -37,6 +38,7 @@ RUN mkdir /data && pnpm run build
 
 # Remove development dependencies
 RUN pnpm prune --prod
+
 
 # Final stage for app image
 FROM base
