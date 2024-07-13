@@ -22,8 +22,8 @@ RUN apt-get update -qq && \
 # Install SQLite
 RUN apt-get install -y sqlite3
 
-# Install pnpm
-RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
+# Install pnpm using corepack
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
 # Install node modules
 COPY --link .npmrc package.json pnpm-lock.yaml ./
@@ -45,8 +45,8 @@ FROM base
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y sqlite3
 
-# Install pnpm in the final image
-RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
+# Install pnpm in the final image using corepack
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
 # Copy built application
 COPY --from=build /app /app
