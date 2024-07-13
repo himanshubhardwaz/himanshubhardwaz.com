@@ -1,12 +1,13 @@
 ---
 import Button from "./Button.astro";
+import logo from "~/assets/images/logo.png";
 ---
 
 <header
   class="px-4 mx-auto max-w-xl flex items-center justify-between w-full py-2"
 >
   <a href="/" class="text-text hover:text-text-subtle transition-colors">
-    HB
+    <img src={logo.src} alt="HB" class="h-12 w-auto" />
   </a>
   <div class="items-center flex space-x-2">
     <Button href="/blog">Articles</Button>
