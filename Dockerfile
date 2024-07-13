@@ -24,7 +24,7 @@ RUN apt-get update -qq && \
 RUN apt-get install -y sqlite3
 
 # Install node modules
-COPY --link .npmrc package-lock.json package.json ./
+COPY --link .npmrc pnpm-lock.json package.json ./
 RUN pnpm ci --include=dev
 
 # Copy application code
