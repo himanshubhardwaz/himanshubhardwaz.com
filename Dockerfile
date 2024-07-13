@@ -25,16 +25,16 @@ RUN apt-get install -y sqlite3
 
 # Install node modules
 COPY --link .npmrc package-lock.json package.json ./
-RUN npm ci --include=dev
+RUN pnpm ci --include=dev
 
 # Copy application code
 COPY --link . .
 
 # Build application
-RUN mkdir /data && npm run build
+RUN mkdir /data && pnpm run build
 
 # Remove development dependencies
-RUN npm prune --omit=dev
+RUN pnpm prune --omit=dev
 
 
 # Final stage for app image
