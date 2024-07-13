@@ -18,26 +18,23 @@ FROM base as build
 
 # Install packages needed to build node modules
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential node-gyp pkg-config python-is-python3 curl
+    apt-get install --no-install-recommends -y build-essential node-gyp pkg-config python-is-python3
 
 # Install SQLite
 RUN apt-get install -y sqlite3
 
-# Install pnpm using corepack
-RUN corepack enable && corepack prepare pnpm@latest --activate
-
 # Install node modules
-COPY --link .npmrc package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+COPY --link .npmrc package-lock.json package.json ./
+RUN npm ci --include=dev
 
 # Copy application code
 COPY --link . .
 
 # Build application
-RUN mkdir /data && pnpm run build
+RUN mkdir /data && npm run build
 
 # Remove development dependencies
-RUN pnpm prune --prod
+RUN npm prune --omit=dev
 
 
 # Final stage for app image
@@ -46,9 +43,6 @@ FROM base
 # Install SQLite in the final image
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y sqlite3
-
-# Install pnpm in the final image using corepack
-RUN corepack enable && corepack prepare pnpm@latest --activate
 
 # Copy built application
 COPY --from=build /app /app
