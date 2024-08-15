@@ -1,5 +1,5 @@
 ---
-title: "How to Properly Use React Testing Library with Vitest"
+title: "How to Correctly Use React Testing Library with Vitest"
 description: "Testing is an essential part of any development process. Learn about common mistakes and best practices for using React Testing Library with Vitest to ensure your React components are thoroughly tested."
 date: 2024-08-15
 cover:
@@ -16,4 +16,200 @@ tags:
   - Fullstack development
 ---
 
-Releasing on 16th August...
+Hi there! I'm excited to share with you a guide on how to properly use React Testing Library with Vitest. This guide will cover common mistakes
+and best practices to ensure your React components are thoroughly tested. Let's dive in!
+
+1. Not using `screen` for queries on Testing
+
+```js
+  // ❌
+  const { getByText } = render(<MyComponent />);
+  const heading = getByText('Welcome');  
+
+  // ✅
+  render(<Example />)
+  const errorMessageNode = screen.getByRole('alert')
+```
+
+Using screen eliminates the need to destructure and maintain queries from the render function, reducing boilerplate code.
+All queries are accessed via screen, making your test code cleaner and easier to read.
+
+2. Using `data-testid` for queries whenever possible is an option, but it should always be the last resort.
+
+Querying by the actual text content (e.g., button labels) is recommended over using test IDs or other mechanisms
+
+```js
+  // ❌
+  screen.getByTestId('login-button')
+
+  // ✅
+  screen.getByRole('button', { name: /login/i });
+```
+
+Querying by text mimics how users interact with the interface, making your tests more representative of real-world usage, if the 
+button text in above example changes to "Log In", the test will fail, alerting you to a change that may require an update to your implementation.
+
+3. Not using `*byRole` when querying for elements with a specific role.
+
+```html
+  <button><span>Sign</span> <span>Up</span></button>
+```
+
+```js
+  screen.getByText(/sign up/i); // ❌ This fails
+
+  screen.getByRole('button', { name: /sign up/i }); // ✅ This works!
+```
+
+For a comprehensive list of roles, you can refer to [MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles). 
+
+An excellent feature of the `*ByRole` queries is that if an element with the specified role cannot be found, 
+the library not only logs the entire DOM for you, but it also provides a list of available roles to query.
+
+```js
+  screen.getByRole('textbox'); // ❌ This fails and logs the available roles present in the DOM
+
+  TestingLibraryElementError: Unable to find an accessible element with the role "blah"
+
+  Here are the accessible roles:
+
+  button:
+
+  Name "Hello World":
+  <button />
+```
+
+You don’t need to explicitly add role="button" to the button element; it automatically has this role due to the implicit role system. 
+
+4. Incorrectly Adding `aria-`, `role`, and Other Accessibility Attributes
+
+```js
+  // ❌
+  <button aria-label="Sign Up" role="button">Sign Up</button>
+
+  // ✅ 
+  <button aria-label="Sign Up">Sign Up</button>
+```
+
+Accessibility attributes should be reserved for situations where semantic HTML alone doesn't meet your requirements.
+
+Important Note: When making input elements accessible with a role, remember to specify the type attribute to ensure proper functionality.
+
+5. The Importance of Using `@testing-library/user-event`
+
+```js
+  // ❌
+  fireEvent.change(input, { target: { value: 'himanshu76200@gmail.com' } });
+
+  // ✅
+  userEvent.type(input, 'himanshu76200@gmail.com');
+```
+
+[@testing-library/user-event](https://github.com/testing-library/user-event) tries to simulate the real events that would happen in the browser as the user interacts with it. 
+In the example above, `fireEvent.change` triggers only a single change event on the input element. In contrast, `userEvent.type` simulates the complete typing experience by firing `keyDown`, `keyPress`, and `keyUp` events for each character. 
+This approach closely mirrors how users actually interact with the UI.
+
+Using userEvent is particularly beneficial when working with libraries that may not listen for just the change event, ensuring that your tests reflect true user behavior.
+
+6. The Use of `query*` Variants in Testing
+
+```js
+  // ❌
+  expect(screen.queryByRole('alert')).toBeInTheDocument();
+
+  // ✅
+  expect(screen.getByRole('alert')).toBeInTheDocument();
+  expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+```
+
+The query* variants of the querying functions are specifically designed to avoid throwing an error when no matching element is found; instead, they return null. 
+This feature is primarily useful for verifying that an element is not present in the DOM.
+
+Using the get* and find* variants is highly recommended when you expect an element to be present because they throw informative errors if no match is found.
+These errors print the entire document, providing context for why the query may have failed. In contrast, query* will simply return null,
+and the most informative message you’ll receive is that "null isn't in the document," which offers little insight.
+
+7. The Use of `waitFor` in Testing
+
+```js
+  // ❌
+  const submitButton = await waitFor(() =>
+	  screen.getByRole('button', { name: /submit/i }),
+  );
+
+  // ✅
+  const submitButton = await screen.findByRole('button', { name: /submit/i });
+```
+
+Both of these are valid approaches, matter of fact `findBy*` is a wrapper around `getBy*` and `waitFor`. But you'll get better error messages and `findBy` seems to be more readable.
+
+8. Passing an empty callback to `waitFor`
+
+```js
+  // ❌
+  await waitFor(() => {});
+  expect(myFunc).toHaveBeenCalled();
+
+  // ✅
+  await waitFor(() => expect(myFunc).toHaveBeenCalled());
+```
+
+The purpose of `waitFor` is to wait for something to happen, when you pass an empty callback, it might seem to work in the current test 
+context—perhaps because all you're waiting for is "one tick of the event loop" due to how your mocks are set up. However, relying on this 
+approach creates a fragile test that could easily break if you refactor your asynchronous logic in the future.
+
+9. Performing side-effects inside `waitFor`
+
+```js
+  // ❌
+  await waitFor(() => {
+    fireEvent.keyDown(input, { key: 'ArrowDown' });
+    expect(screen.getAllByRole('listitem')).toHaveLength(3);
+  });
+
+  // ✅
+  fireEvent.keyDown(input, { key: 'ArrowDown' });
+  await waitFor(() => {
+    expect(screen.getAllByRole('listitem')).toHaveLength(3);
+  });
+```
+
+The waitFor function is designed for situations where there is a non-deterministic delay between an action and when the corresponding assertion passes.
+Because of this, the callback may be invoked multiple times at varying intervals (triggered both on intervals and during DOM mutations).
+As a result, if you place side-effects within waitFor, they might execute multiple times unexpectedly.
+
+Additionally, snapshot assertions should not be used inside waitFor. If you need to take a snapshot, ensure you first wait for a specific 
+assertion to pass, and then proceed with the snapshot.
+
+10. Avoiding Multiple Assertions in a Single `waitFor` Callback
+
+```js
+  // ❌
+  await waitFor(() => {
+    expect(screen.getByRole('button')).toBeInTheDocument();
+    expect(screen.getByRole('button')).toHaveTextContent('Submit');
+  });
+
+  // ✅
+  await waitFor(() => expect(screen.getByRole('button')).toBeInTheDocument());
+  expect(screen.getByRole('button')).toHaveTextContent('Submit');
+```
+
+When you include multiple assertions within a single waitFor callback, it can lead to slower test failures. 
+
+If you have a long block of asynchronous code within a waitFor and it fails at a specific line after taking "t" seconds, you'll lose that "t" seconds every time you rerun the entire block due to the timeout. 
+Therefore, it’s essential to distribute your code across multiple waitFor calls. 
+This approach allows you to have a more manageable timeout for each assertion, which is particularly important when testing complex logic.
+
+Additionally, when running tests on platforms like GitHub Actions, your tests might fail due to RAM constraints or timeout issues. 
+If an assertion does not complete within the allotted timeout, it can lead to failures. 
+Therefore, ensure that the timeout settings are sufficient for the environment where you are executing your tests.
+
+You can configure this timeout in your setupTests.ts file like this:
+
+```js
+  // setupTests.ts
+  import { configure } from "@testing-library/react";
+
+  configure({ asyncUtilTimeout: 5000 });
+```
