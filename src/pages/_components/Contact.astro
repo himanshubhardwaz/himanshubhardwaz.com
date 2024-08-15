@@ -1,0 +1,28 @@
+---
+import Section from "~/components/Section";
+import AvailabilityIndicator from "~/pages/_components/partials/AvailabilityIndicator.astro";
+import SocialLinks from "~/pages/_components/partials/ServiceCard/SocialLinks.astro";
+
+const id = "contact";
+---
+
+<Section {id} class="pb-0">
+  <div class="flex items-center justify-between">
+    <Section.Title {id}>Contact</Section.Title>
+    <AvailabilityIndicator />
+  </div>
+  <p class="mt-4">
+    I’d love to hear from you! Whether you’re looking for a developer, have a
+    question, or just want to chat, feel free to get in touch. Depending on my
+    current schedule (check the top-right indicator), I might be available for
+    new projects.
+  </p>
+  <a
+    href="mailto:himanshu76200@gmail.com"
+    class="mt-4 block underline transition-colors hover:text-text"
+    >himanshu76200@gmail.com</a
+  >
+  <div class="mt-4">
+    <SocialLinks />
+  </div>
+</Section>

@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content";
+import ArticleCard from "~/components/ArticleCard.astro";
+import Section from "~/components/Section";
+import BaseLayout from "~/layouts/Layout.astro";
+
+const articles = (await getCollection("posts")).sort((a, b) =>
+  +a.data.date < +b.data.date ? 1 : -1
+);
+---
+
+<BaseLayout
+  title="Blog"
+  description="Read my thoughts on software development, design, and more."
+>
+  <Section class="pt-8">
+    <Section.Title as="h1">Blog</Section.Title>
+    <div class="grid grid-cols-1 mt-4 gap-8">
+      {
+        articles.map((article, i) => (
+          <ArticleCard {article} preloadImage={i <= 1} />
+        ))
+      }
+    </div>
+  </Section>
+</BaseLayout>

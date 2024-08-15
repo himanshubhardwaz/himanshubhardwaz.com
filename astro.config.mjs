@@ -1,8 +1,30 @@
-import { defineConfig } from 'astro/config';
-import svelte from '@astrojs/svelte';
+import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
+import mdx from "@astrojs/mdx";
+// import redirects from "./redirects.mjs";
+import sitemap from "@astrojs/sitemap";
 
-// https://astro.build/config
 export default defineConfig({
-    integrations: [tailwind(), svelte()],
+  site: "https://himanshubhardwaz.com",
+  integrations: [tailwind(), mdx(), sitemap()],
+  markdown: {
+    shikiConfig: {
+      experimentalThemes: {
+        light: "github-light",
+        dark: "one-dark-pro",
+      },
+    },
+  },
+  output: "hybrid",
+  //   redirects: {
+  //     ...Object.fromEntries(
+  //       Object.entries(redirects).map(([from, destination]) => [
+  //         from,
+  //         {
+  //           destination,
+  //           status: 308,
+  //         },
+  //       ])
+  //     ),
+  //   },
 });

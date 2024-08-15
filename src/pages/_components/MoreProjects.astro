@@ -1,0 +1,18 @@
+---
+import { getCollection } from "astro:content";
+import Section from "~/components/Section";
+import ProjectCard from "~/pages/_components/partials/ProjectCard.astro";
+import Text from "~/pages/_components/partials/Text.astro";
+
+const projects = (await getCollection("projects")).reverse();
+
+const id = "more-projects";
+---
+
+<Section {id}>
+  <Section.Title {id}>Projects</Section.Title>
+  <div class="grid grid-cols-1 mt-4 gap-10">
+    {projects.map((project) => <ProjectCard {project} />)}
+  </div>
+  <Text id="more-projects" class="mt-10" />
+</Section>

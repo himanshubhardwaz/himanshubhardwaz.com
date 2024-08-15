@@ -1,0 +1,81 @@
+---
+import { Image } from "astro:assets";
+import image from "~/assets/profile-picture.jpeg";
+import Section from "~/components/Section";
+import AvailabilityIndicator from "~/pages/_components/partials/AvailabilityIndicator.astro";
+import SocialLinks from "./partials/ServiceCard/SocialLinks.astro";
+---
+
+<Section class="pt-0 sm:pt-8">
+  <div class="flex max-sm:flex-col gap-4">
+    <Image
+      src={image}
+      alt=""
+      class="h-24 w-24 sm:h-32 sm:w-32 rounded-full bg-bg-subtle border border-border shrink-0 object-cover"
+      loading="eager"
+      width={128}
+    />
+    <div>
+      <div class="flex justify-between items-center gap-4">
+        <h1 class="text-2xl font-semibold text-text">Himanshu Bhardwaz</h1>
+        <AvailabilityIndicator />
+      </div>
+      <div class="mt-2 space-y-2">
+        <p>Software Enginner, Full Stack, Indian.</p>
+        <p>
+          SDE 1 at<a
+            href="https://saaslabs.co"
+            class="text-text font-medium underline"
+            target="_blank"
+            referrerpolicy="no-referrer"
+          >
+            SaaSLabs.
+          </a>
+        </p>
+        <p>
+          <span
+            id="hero-time"
+            class="bg-bg-subtle border border-border px-1 py-0.5 tabular-nums select-none"
+            >00:00:00</span
+          > Indian Standard Time.
+        </p>
+      </div>
+      <div class="mt-4">
+        <SocialLinks />
+      </div>
+    </div>
+  </div>
+  <script is:inline>
+    window.__handleTime ??= () => {
+      const updateTime = () => {
+        const today = new Date();
+        const formatter = new Intl.DateTimeFormat("en-US", {
+          timeZone: "IST",
+          hour12: false, // 24-hour format
+          hour: "numeric",
+          minute: "numeric",
+          second: "numeric",
+        });
+
+        // Format the date using the formatter
+        const timeInTimeZone = formatter.format(today);
+
+        document.getElementById("hero-time").innerText = timeInTimeZone;
+      };
+
+      updateTime();
+      return setInterval(() => {
+        updateTime();
+      }, 1000);
+    };
+
+    window.__handleTimeId = window.__handleTime();
+    document.addEventListener("astro:after-swap", () => {
+      if (window.__handleTimeId) {
+        clearInterval(window.__handleTimeId);
+      }
+
+      window.__handleTimeId = undefined;
+    });
+  </script>
+</Section>

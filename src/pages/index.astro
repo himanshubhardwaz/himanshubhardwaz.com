@@ -1,11 +1,22 @@
 ---
 import "~/styles/main.css";
+import Hero from "./_components/Hero.astro";
+import About from "./_components/About.astro";
+import Experiences from "./_components/Experiences.astro";
+import MoreProjects from "./_components/MoreProjects.astro";
+import LatestArticle from "./_components/LatestArticle.astro";
+import Contact from "./_components/Contact.astro";
 import BaseLayout from "~/layouts/Layout.astro";
 ---
 
 <BaseLayout
   title="Home"
-  description="Fullstack developer. I love building things."
+  description="Software Engineer, Full Stack Developer, Frontend Developer"
 >
-
+  <Hero />
+  <About />
+  <Experiences />
+  <MoreProjects />
+  <LatestArticle />
+  <Contact />
 </BaseLayout>

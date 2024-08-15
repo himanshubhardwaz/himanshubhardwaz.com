@@ -1,11 +1,10 @@
-<!-- ---
+---
 import { getEntry, type CollectionEntry } from "astro:content";
 interface Props {
   id: CollectionEntry<"techs">["slug"];
 }
 
 const { id } = Astro.props;
-
 const tech = await getEntry("techs", id);
 const { name, href } = tech.data;
 const { Content } = await tech.render();
@@ -26,4 +25,4 @@ const { Content } = await tech.render();
   .tech-pill svg {
     @apply w-full h-full;
   }
-</style> -->
+</style>
