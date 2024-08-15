@@ -15,7 +15,7 @@ export default defineConfig({
       },
     },
   },
-  output: "hybrid",
+  output: "static",
   //   redirects: {
   //     ...Object.fromEntries(
   //       Object.entries(redirects).map(([from, destination]) => [
