@@ -1,7 +1,6 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
-// import redirects from "./redirects.mjs";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
@@ -16,15 +15,4 @@ export default defineConfig({
     },
   },
   output: "static",
-  //   redirects: {
-  //     ...Object.fromEntries(
-  //       Object.entries(redirects).map(([from, destination]) => [
-  //         from,
-  //         {
-  //           destination,
-  //           status: 308,
-  //         },
-  //       ])
-  //     ),
-  //   },
 });
