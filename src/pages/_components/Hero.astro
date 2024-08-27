@@ -46,18 +46,17 @@ import SocialLinks from "./partials/ServiceCard/SocialLinks.astro";
     </div>
   </div>
   <script is:inline>
-    window.__handleTime ??= () => {
+    function startTimer() {
       const updateTime = () => {
         const today = new Date();
         const formatter = new Intl.DateTimeFormat("en-US", {
           timeZone: "IST",
-          hour12: false, // 24-hour format
+          hour12: false,
           hour: "numeric",
           minute: "numeric",
           second: "numeric",
         });
 
-        // Format the date using the formatter
         const timeInTimeZone = formatter.format(today);
 
         document.getElementById("hero-time").innerText = timeInTimeZone;
@@ -67,15 +66,17 @@ import SocialLinks from "./partials/ServiceCard/SocialLinks.astro";
       return setInterval(() => {
         updateTime();
       }, 1000);
-    };
+    }
 
-    window.__handleTimeId = window.__handleTime();
+    window.__handleTimeId = startTimer();
+
     document.addEventListener("astro:after-swap", () => {
       if (window.__handleTimeId) {
         clearInterval(window.__handleTimeId);
       }
 
-      window.__handleTimeId = undefined;
+      // Restart the timer after swap
+      window.__handleTimeId = startTimer();
     });
   </script>
 </Section>
