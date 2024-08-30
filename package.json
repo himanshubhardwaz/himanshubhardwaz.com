@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.3",
+    "@astrojs/cloudflare": "^11.0.4",
     "@flydotio/dockerfile": "^0.5.8",
     "@tailwindcss/typography": "^0.5.15",
     "drizzle-kit": "^0.24.2",
