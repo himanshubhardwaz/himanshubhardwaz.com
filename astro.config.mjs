@@ -14,5 +14,5 @@ export default defineConfig({
       },
     },
   },
-  output: "static",
+  output: "hybrid",
 });
