@@ -2,9 +2,11 @@ import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
+import cloudflare from "@astrojs/cloudflare";
 
 export default defineConfig({
   site: "https://himanshubhardwaz.com",
+  adapter: cloudflare(),
   integrations: [tailwind(), mdx(), sitemap()],
   markdown: {
     shikiConfig: {
@@ -14,5 +16,10 @@ export default defineConfig({
       },
     },
   },
-  output: "static",
+  output: "hybrid",
+  vite: {
+    define: {
+      "process.env": process.env,
+    },
+  },
 });
