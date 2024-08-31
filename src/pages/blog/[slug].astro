@@ -136,6 +136,7 @@ try {
       viewBox="0 0 24 24"
       stroke-width="1.5"
       stroke="currentColor"
+      id="liked-svg"
       class="size-6 icon"
     >
       <path
@@ -148,15 +149,29 @@ try {
 </BaseLayout>
 
 <style>
-  /* Default icon color */
   .icon {
     fill: none;
     stroke: currentColor;
   }
-
-  /* TODO: Liked state color */
   .icon.liked {
-    fill: red;
+    animation: likeAnimation 0.3s ease-in-out forwards;
+  }
+  @keyframes likeAnimation {
+    0% {
+      transform: scale(1);
+      fill: none;
+      stroke: currentColor;
+    }
+    50% {
+      transform: scale(1.3);
+      fill: red;
+      stroke: red;
+    }
+    100% {
+      transform: scale(1);
+      fill: red;
+      stroke: red;
+    }
   }
 </style>
 
@@ -172,6 +187,10 @@ try {
     }
   }
 
+  if(localStorage.getItem("liked") === "true") {
+    document.getElementById("liked-svg")?.classList.add("liked");
+  }
+
   async function toggleLike() {
     const button = document.getElementById("like-button");
     if (!button) return;
@@ -179,7 +198,8 @@ try {
     let liked = localStorage.getItem("liked") === "true";
 
     liked = !liked;
-    button.classList.toggle("liked", liked);
+    const likedSvg = document.getElementById("liked-svg");
+    if (likedSvg) likedSvg.classList.toggle("liked", liked);
 
     const { data } = await actions.updateLikesCount({
       slug: getSlugFromURL(),
