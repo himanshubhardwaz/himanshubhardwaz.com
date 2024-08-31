@@ -85,8 +85,6 @@ try {
         <span>All articles</span>
       </Button>
       <div class="flex items-center gap-2">
-        Likes: {likeCount}, Views: {viewCount}
-        <span>|</span>
         <time datetime={data.date.toISOString()}
           >{
             new Intl.DateTimeFormat("en-US", { dateStyle: "medium" }).format(
@@ -104,6 +102,7 @@ try {
         transition:name={`article-cover:${article.slug}`}
       />
       <h1 transition:name={`article-title:${article.slug}`}>{data.title}</h1>
+      <h5>Likes: {likeCount}; Views: {viewCount}</h5>
       <p class="lead" transition:name={`article-description:${article.slug}`}>
         {data.description}
       </p>
