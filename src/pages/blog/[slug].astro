@@ -147,6 +147,134 @@ try {
   </button>
 </BaseLayout>
 
+<script>
+  import { getSlugFromURL } from "~/utils/getSlugFromURL";
+  import { actions } from "astro:actions";
+  import type { Article } from "~/types";
+
+  let isLoading = false; // Track loading state
+
+  function getAllArticles() {
+    if (!localStorage.getItem("articles")) {
+      localStorage.setItem("articles", JSON.stringify([]));
+    }
+    return JSON.parse(localStorage.getItem("articles")!) as Array<Article>;
+  }
+
+  function getArticle() {
+    const articles = getAllArticles();
+    return articles.find((article) => article.slug === getSlugFromURL());
+  }
+
+  function updatedArticlesState(article: Article) {
+    let allArticles = getAllArticles();
+    const currArticleIndex = allArticles.findIndex((article) => article.slug === getSlugFromURL());
+    allArticles[currArticleIndex] = article;
+    localStorage.setItem("articles", JSON.stringify(allArticles));
+  }
+
+  function initiateLocalStorage() {
+    const article = getArticle();
+
+    if (!article) {
+      localStorage.setItem("articles", JSON.stringify([...getAllArticles(), { slug: getSlugFromURL(), viewed: false, liked: false }]));
+      return getArticle();
+    }
+
+    return article;
+  }
+
+  initiateLocalStorage();
+
+  function isArticleViewed() {
+    const article = getArticle();
+    return article?.viewed;
+  }
+
+  function isArticleLiked() {
+    const article = getArticle();
+    return article?.liked;
+  }
+
+  function updateLikeState(liked: boolean) {
+    let article = getArticle();
+    if (!article) {
+      initiateLocalStorage();
+      article = getArticle();
+    }
+
+    article!.liked = liked;
+
+    updatedArticlesState(article!);
+  }
+
+  function updatedViewState(viewed: boolean) {
+    let article = getArticle();
+    if (!article) {
+      initiateLocalStorage();
+      article = getArticle();
+    }
+
+    article!.viewed = viewed;
+
+    updatedArticlesState(article!);
+  }
+
+  if (isArticleLiked()) {
+    document.getElementById("liked-svg")?.classList.add("liked");
+  }
+
+  if (!isArticleViewed()) {
+    const { data } = await actions.updateViewCount({ slug: getSlugFromURL() });
+
+    if (data) {
+      updatedViewState(true);
+    }
+  }
+
+  async function toggleLike() {
+    if (isLoading) return; // Prevent multiple clicks
+    isLoading = true;
+
+    const button = document.getElementById("like-button") as HTMLButtonElement;
+    if (!button) return;
+
+    button.disabled = true; // Disable the button during the operation
+    button.classList.add("loading"); // Add a loading class
+
+    let liked = isArticleLiked();
+
+    liked = !liked;
+    const likedSvg = document.getElementById("liked-svg");
+    if (likedSvg) likedSvg.classList.toggle("liked", liked);
+
+    try {
+      const { data } = await actions.updateLikesCount({
+        slug: getSlugFromURL(),
+        liked,
+      });
+
+      if (data) {
+        updateLikeState(data.liked);
+      } else {
+        updateLikeState(!liked);
+      }
+    } catch (error) {
+      console.error(error);
+      updateLikeState(!liked);
+    } finally {
+      isLoading = false;
+      button.disabled = false; // Re-enable the button after the operation
+      button.classList.remove("loading"); // Remove the loading class
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const button = document.getElementById("like-button") as HTMLButtonElement;
+    if (button) button.addEventListener("click", toggleLike);
+  });
+</script>
+
 <style>
   .icon {
     fill: none;
@@ -172,46 +300,8 @@ try {
       stroke: red;
     }
   }
+  #like-button.loading {
+    opacity: 0.6;
+    pointer-events: none;
+  }
 </style>
-
-<script>
-  import { getSlugFromURL } from "~/utils/getSlugFromURL";
-  import { actions } from "astro:actions";
-
-  if (!localStorage.getItem("viewed")) {
-    const { data } = await actions.updateViewCount({ slug: getSlugFromURL() });
-
-    if (data) {
-      localStorage.setItem("viewed", data);
-    }
-  }
-
-  if(localStorage.getItem("liked") === "true") {
-    document.getElementById("liked-svg")?.classList.add("liked");
-  }
-
-  async function toggleLike() {
-    const button = document.getElementById("like-button");
-    if (!button) return;
-
-    let liked = localStorage.getItem("liked") === "true";
-
-    liked = !liked;
-    const likedSvg = document.getElementById("liked-svg");
-    if (likedSvg) likedSvg.classList.toggle("liked", liked);
-
-    const { data } = await actions.updateLikesCount({
-      slug: getSlugFromURL(),
-      liked,
-    });
-
-    if (data) {
-      localStorage.setItem("liked", String(data.liked));
-    }
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const button = document.getElementById("like-button");
-    if (button) button.addEventListener("click", toggleLike);
-  });
-</script>
