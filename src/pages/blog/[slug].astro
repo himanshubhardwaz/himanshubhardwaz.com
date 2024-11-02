@@ -8,8 +8,6 @@ import BaseLayout from "~/layouts/Layout.astro";
 import { components } from "~/components/mdx";
 import "@fontsource-variable/jetbrains-mono";
 import jetbrainsMonoFile from "@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2?url";
-import { db } from "~/db";
-import { eq } from "drizzle-orm";
 
 export const getStaticPaths = (async () => {
   return (await getCollection("posts")).map((article) => ({
@@ -26,22 +24,10 @@ export let likeCount = 0;
 export let viewCount = 0;
 
 try {
-  const [likes, views] = await Promise.all([
-    db.query.likesTable.findFirst({
-      where: (ct) => eq(ct.slug, slug),
-    }),
-    db.query.viewsTable.findFirst({
-      where: (ct) => eq(ct.slug, slug),
-    }),
-  ]);
-
-  if (views) {
-    viewCount = views.views;
-  }
-
-  if (likes) {
-    likeCount = likes.likes;
-  }
+  const response = await fetch(`${import.meta.env.SITE}/api/blog/${slug}`);
+  const { likes, views } = await response.json();
+  likeCount = likes;
+  viewCount = views;
 } catch (error) {
   console.error(error);
 }
@@ -149,7 +135,6 @@ try {
 
 <script>
   import { getSlugFromURL } from "~/utils/getSlugFromURL";
-  import { actions } from "astro:actions";
   import type { Article } from "~/types";
 
   let isLoading = false; // Track loading state
@@ -168,7 +153,9 @@ try {
 
   function updatedArticlesState(article: Article) {
     let allArticles = getAllArticles();
-    const currArticleIndex = allArticles.findIndex((article) => article.slug === getSlugFromURL());
+    const currArticleIndex = allArticles.findIndex(
+      (article) => article.slug === getSlugFromURL()
+    );
     allArticles[currArticleIndex] = article;
     localStorage.setItem("articles", JSON.stringify(allArticles));
   }
@@ -177,7 +164,13 @@ try {
     const article = getArticle();
 
     if (!article) {
-      localStorage.setItem("articles", JSON.stringify([...getAllArticles(), { slug: getSlugFromURL(), viewed: false, liked: false }]));
+      localStorage.setItem(
+        "articles",
+        JSON.stringify([
+          ...getAllArticles(),
+          { slug: getSlugFromURL(), viewed: false, liked: false },
+        ])
+      );
       return getArticle();
     }
 
@@ -225,11 +218,18 @@ try {
   }
 
   if (!isArticleViewed()) {
-    const { data } = await actions.updateViewCount({ slug: getSlugFromURL() });
-
-    if (data) {
-      updatedViewState(true);
-    }
+    const response = await fetch(
+      `${import.meta.env.SITE}/api/blog/${getSlugFromURL()}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ viewed: true }),
+      }
+    );
+    const { viewed } = await response.json();
+    updatedViewState(viewed);
   }
 
   async function toggleLike() {
@@ -249,23 +249,25 @@ try {
     if (likedSvg) likedSvg.classList.toggle("liked", liked);
 
     try {
-      const { data } = await actions.updateLikesCount({
-        slug: getSlugFromURL(),
-        liked,
-      });
-
-      if (data) {
-        updateLikeState(data.liked);
-      } else {
-        updateLikeState(!liked);
-      }
+      const response = await fetch(
+        `${import.meta.env.SITE}/api/blog/${getSlugFromURL()}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ liked }),
+        }
+      );
+      const { liked: updatedLiked } = await response.json();
+      updateLikeState(updatedLiked);
+      if (likedSvg) likedSvg.classList.toggle("liked", updatedLiked);
     } catch (error) {
-      console.error(error);
       updateLikeState(!liked);
     } finally {
       isLoading = false;
-      button.disabled = false; // Re-enable the button after the operation
-      button.classList.remove("loading"); // Remove the loading class
+      button.disabled = false;
+      button.classList.remove("loading");
     }
   }
 
