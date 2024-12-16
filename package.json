@@ -21,6 +21,7 @@
     "@fontsource-variable/inter": "^5.1.0",
     "@fontsource-variable/jetbrains-mono": "^5.1.1",
     "@libsql/client": "^0.10.0",
+    "arctic": "^2.3.2",
     "astro": "^4.16.8",
     "astro-seo": "^0.8.4",
     "dotenv": "^16.4.7",

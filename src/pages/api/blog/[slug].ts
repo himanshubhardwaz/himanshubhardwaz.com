@@ -54,9 +54,6 @@ export const POST: APIRoute = async ({ params, request }) => {
   const slug = params.slug;
   if (!slug) return new Response(null, { status: 404 });
 
-  console.log("CONTENT TYPE: ", request.headers.get("Content-Type"));
-  console.log({ headers: request.headers });
-
   try {
     if (request.headers.get("Content-Type") === "application/json") {
       const body = await request.json();
