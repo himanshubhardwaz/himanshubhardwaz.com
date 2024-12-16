@@ -218,18 +218,22 @@ try {
   }
 
   if (!isArticleViewed()) {
-    const response = await fetch(
-      `${import.meta.env.SITE}/api/blog/${getSlugFromURL()}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ viewed: true }),
-      }
-    );
-    const { viewed } = await response.json();
-    updatedViewState(viewed);
+    try {
+      const response = await fetch(
+        `${import.meta.env.SITE}/api/blog/${getSlugFromURL()}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ viewed: true }),
+        }
+      );
+      const { viewed } = await response.json();
+      updatedViewState(viewed);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   async function toggleLike() {
@@ -271,10 +275,15 @@ try {
     }
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const button = document.getElementById("like-button") as HTMLButtonElement;
-    if (button) button.addEventListener("click", toggleLike);
-  });
+  if (isLoading) {
+    document.getElementById("like-button")?.classList.add("loading");
+  } else {
+    document.getElementById("like-button")?.classList.remove("loading");
+  }
+
+  const button = document.getElementById("like-button") as HTMLButtonElement;
+  if (button) button.addEventListener("click", toggleLike);
+  else console.error("Like button not found");
 </script>
 
 <style>
@@ -305,5 +314,6 @@ try {
   #like-button.loading {
     opacity: 0.6;
     pointer-events: none;
+    cursor: not-allowed;
   }
 </style>
