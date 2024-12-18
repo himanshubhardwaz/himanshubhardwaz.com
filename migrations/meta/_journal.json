@@ -15,6 +15,13 @@
       "when": 1725041655288,
       "tag": "0001_stormy_pestilence",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1734540398209,
+      "tag": "0002_lumpy_namora",
+      "breakpoints": true
     }
   ]
 }

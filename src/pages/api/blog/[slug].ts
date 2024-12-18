@@ -1,8 +1,7 @@
 import type { APIRoute, GetStaticPaths } from "astro";
 import { eq, sql } from "drizzle-orm";
-import { db } from "~/db";
+import { db, likesTable, viewsTable } from "~/lib/server/db";
 import { z } from "astro:schema";
-import { likesTable, viewsTable } from "~/db/schema";
 import { getCollection } from "astro:content";
 
 export const prerender = false;
