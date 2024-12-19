@@ -71,6 +71,7 @@ export function setSessionTokenCookie(
   token: string,
   expiresAt: Date
 ): void {
+  console.log("setting cookie: ", token);
   context.cookies.set("session", token, {
     httpOnly: true,
     sameSite: "lax",

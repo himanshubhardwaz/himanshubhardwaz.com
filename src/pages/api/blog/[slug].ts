@@ -4,8 +4,6 @@ import { db, likesTable, viewsTable } from "~/lib/server/db";
 import { z } from "astro:schema";
 import { getCollection } from "astro:content";
 
-export const prerender = false;
-
 export const postBodySchema = z.object({
   liked: z.boolean().optional(),
   viewed: z.boolean().optional(),

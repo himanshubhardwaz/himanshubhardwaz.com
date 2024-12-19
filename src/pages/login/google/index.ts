@@ -3,6 +3,8 @@ import { google } from "~/lib/client/oauth";
 
 import type { APIContext } from "astro";
 
+export const prerender = false;
+
 export async function GET(context: APIContext): Promise<Response> {
   const state = generateState();
   const codeVerifier = generateCodeVerifier();

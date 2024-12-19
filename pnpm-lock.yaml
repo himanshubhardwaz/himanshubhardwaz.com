@@ -29,6 +29,12 @@ dependencies:
   '@libsql/client':
     specifier: ^0.10.0
     version: 0.10.0
+  '@oslojs/crypto':
+    specifier: ^1.0.1
+    version: 1.0.1
+  '@oslojs/encoding':
+    specifier: ^1.1.0
+    version: 1.1.0
   arctic:
     specifier: ^2.3.2
     version: 2.3.2
@@ -42,8 +48,8 @@ dependencies:
     specifier: ^16.4.7
     version: 16.4.7
   drizzle-orm:
-    specifier: ^0.33.0
-    version: 0.33.0(@libsql/client@0.10.0)
+    specifier: ^0.38.2
+    version: 0.38.2(@libsql/client@0.10.0)
   sharp:
     specifier: ^0.33.5
     version: 0.33.5
@@ -65,8 +71,8 @@ devDependencies:
     specifier: ^0.5.15
     version: 0.5.15(tailwindcss@3.4.14)
   drizzle-kit:
-    specifier: ^0.24.2
-    version: 0.24.2
+    specifier: ^0.30.1
+    version: 0.30.1
   typescript:
     specifier: ^5.6.3
     version: 5.6.3
@@ -2779,8 +2785,8 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /drizzle-kit@0.24.2:
-    resolution: {integrity: sha512-nXOaTSFiuIaTMhS8WJC2d4EBeIcN9OSt2A2cyFbQYBAZbi7lRsVGJNqDpEwPqYfJz38yxbY/UtbvBBahBfnExQ==}
+  /drizzle-kit@0.30.1:
+    resolution: {integrity: sha512-HmA/NeewvHywhJ2ENXD3KvOuM/+K2dGLJfxVfIHsGwaqKICJnS+Ke2L6UcSrSrtMJLJaT0Im1Qv4TFXfaZShyw==}
     hasBin: true
     dependencies:
       '@drizzle-team/brocli': 0.10.2
@@ -2791,14 +2797,15 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.33.0(@libsql/client@0.10.0):
-    resolution: {integrity: sha512-SHy72R2Rdkz0LEq0PSG/IdvnT3nGiWuRk+2tXZQ90GVq/XQhpCzu/EFT3V2rox+w8MlkBQxifF8pCStNYnERfA==}
+  /drizzle-orm@0.38.2(@libsql/client@0.10.0):
+    resolution: {integrity: sha512-eCE3yPRAskLo1WpM9OHpFaM70tBEDsWhwR/0M3CKyztAXKR9Qs3asZlcJOEliIcUSg8GuwrlY0dmYDgmm6y5GQ==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
-      '@cloudflare/workers-types': '>=3'
-      '@electric-sql/pglite': '>=0.1.1'
-      '@libsql/client': '*'
-      '@neondatabase/serverless': '>=0.1'
+      '@cloudflare/workers-types': '>=4'
+      '@electric-sql/pglite': '>=0.2.0'
+      '@libsql/client': '>=0.10.0'
+      '@libsql/client-wasm': '>=0.10.0'
+      '@neondatabase/serverless': '>=0.10.0'
       '@op-engineering/op-sqlite': '>=2'
       '@opentelemetry/api': ^1.4.1
       '@planetscale/database': '>=1'
@@ -2812,7 +2819,7 @@ packages:
       '@xata.io/client': '*'
       better-sqlite3: '>=7'
       bun-types: '*'
-      expo-sqlite: '>=13.2.0'
+      expo-sqlite: '>=14.0.0'
       knex: '*'
       kysely: '*'
       mysql2: '>=2'
@@ -2830,6 +2837,8 @@ packages:
       '@electric-sql/pglite':
         optional: true
       '@libsql/client':
+        optional: true
+      '@libsql/client-wasm':
         optional: true
       '@neondatabase/serverless':
         optional: true
