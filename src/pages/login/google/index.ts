@@ -13,8 +13,6 @@ export async function GET(context: APIContext): Promise<Response> {
     "profile",
   ]);
 
-  console.log({ url: url.toString() });
-
   context.cookies.set("google_oauth_state", state, {
     path: "/",
     secure: import.meta.env.PROD,

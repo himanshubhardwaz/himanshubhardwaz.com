@@ -5,6 +5,8 @@ import {
 
 import type { APIContext } from "astro";
 
+export const prerender = false;
+
 export async function POST(context: APIContext): Promise<Response> {
   if (context.locals.session === null) {
     return new Response(null, {
@@ -13,5 +15,5 @@ export async function POST(context: APIContext): Promise<Response> {
   }
   await invalidateSession(context.locals.session.id);
   deleteSessionTokenCookie(context);
-  return context.redirect("/login");
+  return context.redirect("/");
 }

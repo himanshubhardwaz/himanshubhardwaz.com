@@ -7,7 +7,7 @@ import { defineMiddleware } from "astro:middleware";
 
 export const onRequest = defineMiddleware(async (context, next) => {
   const token = context.cookies.get("session")?.value ?? null;
-  console.log({ token });
+
   if (token === null) {
     context.locals.user = null;
     context.locals.session = null;
@@ -23,5 +23,6 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   context.locals.session = session;
   context.locals.user = user;
+
   return next();
 });

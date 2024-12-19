@@ -5,11 +5,11 @@ import BaseLayout from "~/layouts/Layout.astro";
 import Button from "~/components/Button.astro";
 import Section from "~/components/Section";
 
-export const prerender = false;
-
 if (Astro.locals.user) {
   return Astro.redirect("/");
 }
+
+export const prerender = false;
 ---
 
 <BaseLayout
