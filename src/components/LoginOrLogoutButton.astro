@@ -1,8 +1,19 @@
 ---
 import Button from "./Button.astro";
-import logo from "~/assets/logo.png";
-import LoginOrLogoutButton from "./LoginOrLogoutButton.astro";
+
+const token = Astro?.cookies?.get("session")?.value ?? null;
 ---
+
+<Button id="logout" style={`display: ${token ? "block" : "none"};`}>
+  Logout
+</Button>
+<Button
+  href="/login"
+  id="login"
+  style={`display: ${token ? "none" : "block"};`}
+>
+  Login
+</Button>
 
 <script>
   const setupLogoutListener = () => {
@@ -32,21 +43,3 @@ import LoginOrLogoutButton from "./LoginOrLogoutButton.astro";
     if (setup) clearInterval(interval);
   }, 200);
 </script>
-
-<header
-  class="px-4 mx-auto max-w-xl flex items-center justify-between w-full py-2"
->
-  <a href="/" class="text-text hover:text-text-subtle transition-colors">
-    <img src={logo.src} alt="HB" class="h-12 w-auto" />
-  </a>
-  <div class="items-center flex space-x-2">
-    <Button href="/blog">Articles</Button>
-    <LoginOrLogoutButton server:defer>
-      <Button id="login" href="/login" slot="fallback">Login</Button>
-    </LoginOrLogoutButton>
-  </div>
-</header>
-<div
-  class="bg-gradient-to-b from-bg to-bg/0 sticky top-2 h-24 z-10 pointer-events-none"
->
-</div>

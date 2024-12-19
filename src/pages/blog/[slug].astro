@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import Button from "~/components/Button.astro";
 import Prose from "~/components/Prose.astro";
-import BaseLayout from "~/layouts/Layout.astro";
+import Layout from "~/layouts/Layout.astro";
 import { components } from "~/components/mdx";
 import "@fontsource-variable/jetbrains-mono";
 import jetbrainsMonoFile from "@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2?url";
@@ -31,9 +31,11 @@ try {
 } catch (error) {
   console.error(error);
 }
+
+export const prerender = true;
 ---
 
-<BaseLayout
+<Layout
   title={data.title}
   description={data.description}
   image={data.cover.src.src}
@@ -131,7 +133,7 @@ try {
       ></path>
     </svg>
   </button>
-</BaseLayout>
+</Layout>
 
 <script>
   import { getSlugFromURL } from "~/utils/getSlugFromURL";
