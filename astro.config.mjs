@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
+import rss from "@astrojs/rss";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import cloudflare from "@astrojs/cloudflare";
@@ -10,7 +11,7 @@ dotenv.config();
 export default defineConfig({
   site: process.env.SITE_URL,
   adapter: cloudflare(),
-  integrations: [tailwind(), mdx(), sitemap()],
+  integrations: [tailwind(), mdx(), sitemap(), rss()],
   markdown: {
     shikiConfig: {
       experimentalThemes: {
