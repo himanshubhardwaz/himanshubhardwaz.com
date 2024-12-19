@@ -46,6 +46,12 @@ const canonical = Astro.url.href;
       href={interFile}
       type="font/woff2"
     />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Himanshu's Blogs"
+      href={new URL("rss.xml", Astro.site)}
+    />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <SEO
       {title}

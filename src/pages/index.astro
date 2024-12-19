@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+
 import "~/styles/main.css";
 import Hero from "./_components/Hero.astro";
 import About from "./_components/About.astro";
@@ -6,10 +8,10 @@ import Experiences from "./_components/Experiences.astro";
 import MoreProjects from "./_components/MoreProjects.astro";
 import LatestArticle from "./_components/LatestArticle.astro";
 import Contact from "./_components/Contact.astro";
-import BaseLayout from "~/layouts/Layout.astro";
+import Layout from "~/layouts/Layout.astro";
 ---
 
-<BaseLayout
+<Layout
   title="Home"
   description="Software Engineer, Full Stack Developer, Frontend Developer"
 >
@@ -19,4 +21,4 @@ import BaseLayout from "~/layouts/Layout.astro";
   <MoreProjects />
   <LatestArticle />
   <Contact />
-</BaseLayout>
+</Layout>
