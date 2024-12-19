@@ -19,7 +19,7 @@ export default defineConfig({
       },
     },
   },
-  output: "server",
+  output: "hybrid",
   vite: {
     define: {
       "process.env": process.env,
