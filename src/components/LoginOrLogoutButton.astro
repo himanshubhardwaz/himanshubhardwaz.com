@@ -41,5 +41,5 @@ const token = Astro?.cookies?.get("session")?.value ?? null;
   const interval = setInterval(() => {
     const setup = setupLogoutListener();
     if (setup) clearInterval(interval);
-  }, 200);
+  }, 50);
 </script>
