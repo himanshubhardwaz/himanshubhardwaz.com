@@ -127,7 +127,7 @@ const { Content } = await article.render();
 </Layout>
 
 <script>
-  import { SITE_URL } from "astro:env/client";
+  import { BASE_URL } from "astro:env/client";
   import { getSlugFromURL } from "~/utils/getSlugFromURL";
   import type { Article } from "~/types";
 
@@ -213,7 +213,7 @@ const { Content } = await article.render();
 
   if (!isArticleViewed()) {
     try {
-      const response = await fetch(`${SITE_URL}/api/blog/${getSlugFromURL()}`, {
+      const response = await fetch(`${BASE_URL}/api/blog/${getSlugFromURL()}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -244,7 +244,7 @@ const { Content } = await article.render();
     if (likedSvg) likedSvg.classList.toggle("liked", liked);
 
     try {
-      const response = await fetch(`${SITE_URL}/api/blog/${getSlugFromURL()}`, {
+      const response = await fetch(`${BASE_URL}/api/blog/${getSlugFromURL()}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

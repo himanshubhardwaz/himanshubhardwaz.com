@@ -20,7 +20,7 @@ export default defineConfig({
         context: "server",
         access: "secret",
       }),
-      SITE_URL: envField.string({
+      BASE_URL: envField.string({
         required: true,
         context: "client",
         access: "public",
