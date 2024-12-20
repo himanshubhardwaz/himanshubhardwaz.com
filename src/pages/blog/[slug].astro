@@ -24,7 +24,7 @@ export let likeCount = 0;
 export let viewCount = 0;
 
 try {
-  const response = await fetch(`${import.meta.env.SITE}/api/blog/${slug}`);
+  const response = await fetch(`${import.meta.env.SITE_URL}/api/blog/${slug}`);
   const { likes, views } = await response.json();
   likeCount = likes;
   viewCount = views;
@@ -220,7 +220,7 @@ try {
   if (!isArticleViewed()) {
     try {
       const response = await fetch(
-        `${import.meta.env.SITE}/api/blog/${getSlugFromURL()}`,
+        `${import.meta.env.SITE_URL}/api/blog/${getSlugFromURL()}`,
         {
           method: "POST",
           headers: {
