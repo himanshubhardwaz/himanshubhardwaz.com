@@ -3,7 +3,7 @@ import {
   createSession,
   setSessionTokenCookie,
 } from "~/lib/server/session";
-import { google } from "~/lib/client/oauth";
+import { google } from "~/lib/server/oauth";
 import { decodeIdToken } from "arctic";
 
 import type { APIContext } from "astro";

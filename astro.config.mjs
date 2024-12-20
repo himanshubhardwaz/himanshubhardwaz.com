@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
@@ -8,6 +8,35 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export default defineConfig({
+  env: {
+    schema: {
+      TURSO_DATABASE_URL: envField.string({
+        required: true,
+        context: "server",
+        access: "secret",
+      }),
+      TURSO_AUTH_TOKEN: envField.string({
+        required: true,
+        context: "server",
+        access: "secret",
+      }),
+      SITE_URL: envField.string({
+        required: true,
+        context: "client",
+        access: "public",
+      }),
+      GOOGLE_OAUTH_CLIENT_ID: envField.string({
+        required: true,
+        context: "server",
+        access: "secret",
+      }),
+      GOOGLE_OAUTH_CLIENT_SECRET: envField.string({
+        required: true,
+        context: "server",
+        access: "secret",
+      }),
+    },
+  },
   site: process.env.SITE_URL,
   adapter: cloudflare(),
   integrations: [tailwind(), mdx(), sitemap()],

@@ -8,6 +8,7 @@ import Layout from "~/layouts/Layout.astro";
 import { components } from "~/components/mdx";
 import "@fontsource-variable/jetbrains-mono";
 import jetbrainsMonoFile from "@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2?url";
+import { SITE_URL } from "astro:env/client";
 
 export const getStaticPaths = (async () => {
   return (await getCollection("posts")).map((article) => ({
@@ -24,8 +25,7 @@ export let likeCount = 0;
 export let viewCount = 0;
 
 try {
-  console.log("SITE_URL_2", import.meta.env.SITE_URL);
-  const response = await fetch(`${import.meta.env.SITE_URL}/api/blog/${slug}`);
+  const response = await fetch(`${SITE_URL}/api/blog/${slug}`);
   const { likes, views } = await response.json();
   likeCount = likes;
   viewCount = views;
@@ -135,6 +135,7 @@ try {
 </Layout>
 
 <script>
+  import { SITE_URL } from "astro:env/client";
   import { getSlugFromURL } from "~/utils/getSlugFromURL";
   import type { Article } from "~/types";
 
@@ -220,17 +221,13 @@ try {
 
   if (!isArticleViewed()) {
     try {
-      console.log("SITE_URL_1", import.meta.env.SITE_URL);
-      const response = await fetch(
-        `${import.meta.env.SITE_URL}/api/blog/${getSlugFromURL()}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ viewed: true }),
-        }
-      );
+      const response = await fetch(`${SITE_URL}/api/blog/${getSlugFromURL()}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ viewed: true }),
+      });
       const { viewed } = await response.json();
       updatedViewState(viewed);
     } catch (error) {
@@ -255,17 +252,13 @@ try {
     if (likedSvg) likedSvg.classList.toggle("liked", liked);
 
     try {
-      console.log("SITE_URL_3", import.meta.env.SITE_URL);
-      const response = await fetch(
-        `${import.meta.env.SITE_URL}/api/blog/${getSlugFromURL()}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ liked }),
-        }
-      );
+      const response = await fetch(`${SITE_URL}/api/blog/${getSlugFromURL()}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ liked }),
+      });
       const { liked: updatedLiked } = await response.json();
       updateLikeState(updatedLiked);
       if (likedSvg) likedSvg.classList.toggle("liked", updatedLiked);
