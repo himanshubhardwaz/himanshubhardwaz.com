@@ -1,6 +1,7 @@
 import rss from "@astrojs/rss";
 import type { APIContext } from "astro";
 import { getCollection } from "astro:content";
+import { SITE_URL } from "astro:env/client";
 
 export async function GET(context: APIContext) {
   const blogs = await getCollection("posts");
@@ -9,7 +10,7 @@ export async function GET(context: APIContext) {
     title: "Himanshu's Personal Website",
     description:
       "A Full Stack Developer with a passion for building and creating. My work reflects a deep-rooted fascination with how things work.",
-    site: import.meta.env.SITE_URL,
+    site: SITE_URL,
     items: blogs.map((post) => ({
       ...post.data,
       pubDate: post.data.date,

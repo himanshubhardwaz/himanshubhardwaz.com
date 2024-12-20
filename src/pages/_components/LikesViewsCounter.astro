@@ -1,0 +1,21 @@
+---
+import { SITE_URL } from "astro:env/client";
+
+const { slug } = Astro.props;
+
+export const prerender = false;
+
+export let likeCount = 0;
+export let viewCount = 0;
+
+try {
+  const response = await fetch(`${SITE_URL}/api/blog/${slug}`);
+  const { likes, views } = await response.json();
+  likeCount = likes;
+  viewCount = views;
+} catch (error) {
+  console.error(error);
+}
+---
+
+<h5>Likes: {likeCount}; Views: {viewCount}</h5>
