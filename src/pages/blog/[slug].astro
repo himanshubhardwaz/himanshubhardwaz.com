@@ -24,6 +24,7 @@ export let likeCount = 0;
 export let viewCount = 0;
 
 try {
+  console.log("SITE_URL_2", import.meta.env.SITE_URL);
   const response = await fetch(`${import.meta.env.SITE_URL}/api/blog/${slug}`);
   const { likes, views } = await response.json();
   likeCount = likes;
@@ -219,6 +220,7 @@ try {
 
   if (!isArticleViewed()) {
     try {
+      console.log("SITE_URL_1", import.meta.env.SITE_URL);
       const response = await fetch(
         `${import.meta.env.SITE_URL}/api/blog/${getSlugFromURL()}`,
         {
@@ -253,6 +255,7 @@ try {
     if (likedSvg) likedSvg.classList.toggle("liked", liked);
 
     try {
+      console.log("SITE_URL_3", import.meta.env.SITE_URL);
       const response = await fetch(
         `${import.meta.env.SITE_URL}/api/blog/${getSlugFromURL()}`,
         {
