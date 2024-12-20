@@ -37,7 +37,6 @@ export default defineConfig({
       }),
     },
   },
-  site: process.env.SITE_URL,
   adapter: cloudflare(),
   integrations: [tailwind(), mdx(), sitemap()],
   markdown: {
