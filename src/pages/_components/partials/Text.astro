@@ -9,7 +9,13 @@ interface Props {
 
 const { id, class: className } = Astro.props;
 
-const { Content } = await (await getEntry("texts", id)).render();
+const text = await getEntry("texts", id);
+
+if (!text) {
+  return;
+}
+
+const { Content } = await text.render();
 ---
 
 <div

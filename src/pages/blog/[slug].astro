@@ -4,10 +4,11 @@ import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import Button from "~/components/Button.astro";
 import Prose from "~/components/Prose.astro";
-import BaseLayout from "~/layouts/Layout.astro";
+import Layout from "~/layouts/Layout.astro";
 import { components } from "~/components/mdx";
 import "@fontsource-variable/jetbrains-mono";
 import jetbrainsMonoFile from "@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2?url";
+import LikesViewsCounter from "~/pages/_components/LikesViewsCounter.astro";
 
 export const getStaticPaths = (async () => {
   return (await getCollection("posts")).map((article) => ({
@@ -19,21 +20,9 @@ export const getStaticPaths = (async () => {
 const { article } = Astro.props;
 const { data, slug } = article;
 const { Content } = await article.render();
-
-export let likeCount = 0;
-export let viewCount = 0;
-
-try {
-  const response = await fetch(`${import.meta.env.SITE}/api/blog/${slug}`);
-  const { likes, views } = await response.json();
-  likeCount = likes;
-  viewCount = views;
-} catch (error) {
-  console.error(error);
-}
 ---
 
-<BaseLayout
+<Layout
   title={data.title}
   description={data.description}
   image={data.cover.src.src}
@@ -88,7 +77,11 @@ try {
         transition:name={`article-cover:${article.slug}`}
       />
       <h1 transition:name={`article-title:${article.slug}`}>{data.title}</h1>
-      <h5>Likes: {likeCount}; Views: {viewCount}</h5>
+
+      <LikesViewsCounter slug={slug} server:defer>
+        <p slot="fallback">Loading...</p>
+      </LikesViewsCounter>
+
       <p class="lead" transition:name={`article-description:${article.slug}`}>
         {data.description}
       </p>
@@ -131,9 +124,10 @@ try {
       ></path>
     </svg>
   </button>
-</BaseLayout>
+</Layout>
 
 <script>
+  import { BASE_URL } from "astro:env/client";
   import { getSlugFromURL } from "~/utils/getSlugFromURL";
   import type { Article } from "~/types";
 
@@ -219,16 +213,13 @@ try {
 
   if (!isArticleViewed()) {
     try {
-      const response = await fetch(
-        `${import.meta.env.SITE}/api/blog/${getSlugFromURL()}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ viewed: true }),
-        }
-      );
+      const response = await fetch(`${BASE_URL}/api/blog/${getSlugFromURL()}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ viewed: true }),
+      });
       const { viewed } = await response.json();
       updatedViewState(viewed);
     } catch (error) {
@@ -253,16 +244,13 @@ try {
     if (likedSvg) likedSvg.classList.toggle("liked", liked);
 
     try {
-      const response = await fetch(
-        `${import.meta.env.SITE}/api/blog/${getSlugFromURL()}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ liked }),
-        }
-      );
+      const response = await fetch(`${BASE_URL}/api/blog/${getSlugFromURL()}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ liked }),
+      });
       const { liked: updatedLiked } = await response.json();
       updateLikeState(updatedLiked);
       if (likedSvg) likedSvg.classList.toggle("liked", updatedLiked);

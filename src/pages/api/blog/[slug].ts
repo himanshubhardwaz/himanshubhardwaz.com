@@ -1,11 +1,8 @@
 import type { APIRoute, GetStaticPaths } from "astro";
 import { eq, sql } from "drizzle-orm";
-import { db } from "~/db";
+import { db, likesTable, viewsTable } from "~/lib/server/db";
 import { z } from "astro:schema";
-import { likesTable, viewsTable } from "~/db/schema";
 import { getCollection } from "astro:content";
-
-export const prerender = false;
 
 export const postBodySchema = z.object({
   liked: z.boolean().optional(),
@@ -53,9 +50,6 @@ export const GET: APIRoute = async ({ params }) => {
 export const POST: APIRoute = async ({ params, request }) => {
   const slug = params.slug;
   if (!slug) return new Response(null, { status: 404 });
-
-  console.log("CONTENT TYPE: ", request.headers.get("Content-Type"));
-  console.log({ headers: request.headers });
 
   try {
     if (request.headers.get("Content-Type") === "application/json") {
