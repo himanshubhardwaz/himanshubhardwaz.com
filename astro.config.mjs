@@ -24,6 +24,7 @@ export default defineConfig({
         required: true,
         context: "client",
         access: "public",
+        default: "https://himanshubhardwaz.com",
       }),
       GOOGLE_OAUTH_CLIENT_ID: envField.string({
         required: true,
