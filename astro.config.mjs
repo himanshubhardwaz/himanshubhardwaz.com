@@ -8,6 +8,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export default defineConfig({
+  vite: {
+    build: {
+      minify: false,
+    },
+  },
   env: {
     schema: {
       TURSO_DATABASE_URL: envField.string({
