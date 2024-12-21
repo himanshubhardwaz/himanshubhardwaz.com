@@ -53,7 +53,7 @@ export default defineConfig({
       },
     },
   },
-  output: "static",
+  output: "server",
   vite: {
     define: {
       "process.env": process.env,
