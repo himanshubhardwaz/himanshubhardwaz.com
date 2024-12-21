@@ -36,7 +36,7 @@ export default defineConfig({
       GOOGLE_OAUTH_CLIENT_ID: envField.string({
         required: true,
         context: "server",
-        access: "secret",
+        access: "public",
         default: process.env.GOOGLE_OAUTH_CLIENT_ID,
       }),
       GOOGLE_OAUTH_CLIENT_SECRET: envField.string({
