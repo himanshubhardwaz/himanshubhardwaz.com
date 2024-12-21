@@ -19,13 +19,11 @@ export default defineConfig({
         required: true,
         context: "server",
         access: "secret",
-        default: process.env.TURSO_DATABASE_URL,
       }),
       TURSO_AUTH_TOKEN: envField.string({
         required: true,
         context: "server",
         access: "secret",
-        default: process.env.TURSO_AUTH_TOKEN,
       }),
       BASE_URL: envField.string({
         required: true,
@@ -36,14 +34,12 @@ export default defineConfig({
       GOOGLE_OAUTH_CLIENT_ID: envField.string({
         required: true,
         context: "server",
-        access: "public",
-        default: process.env.GOOGLE_OAUTH_CLIENT_ID,
+        access: "secret",
       }),
       GOOGLE_OAUTH_CLIENT_SECRET: envField.string({
         required: true,
         context: "server",
         access: "secret",
-        default: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
       }),
     },
   },
