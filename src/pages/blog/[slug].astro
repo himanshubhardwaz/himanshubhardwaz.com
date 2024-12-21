@@ -20,6 +20,7 @@ const { article } = Astro.props;
 const { data, slug } = article;
 const { Content } = await article.render();
 
+
 export let likeCount = 0;
 export let viewCount = 0;
 
@@ -31,6 +32,9 @@ try {
 } catch (error) {
   console.error(error);
 }
+
+export const prerender = true;
+
 ---
 
 <BaseLayout
