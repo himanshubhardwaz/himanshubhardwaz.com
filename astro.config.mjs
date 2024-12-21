@@ -8,6 +8,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export default defineConfig({
+  site: process.env.BASE_URL ?? "https://himanshubhardwaz.com",
   vite: {
     build: {
       minify: false,
