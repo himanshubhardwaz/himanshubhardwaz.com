@@ -1,7 +1,8 @@
 import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro:schema";
 import { eq, sql } from "drizzle-orm";
-import { db, viewsTable, likesTable } from "~/lib/server/db";
+import { db } from "~/db";
+import { viewsTable, likesTable } from "~/db/schema";
 
 export const server = {
   updateViewCount: defineAction({
