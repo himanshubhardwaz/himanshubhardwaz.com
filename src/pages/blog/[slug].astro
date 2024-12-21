@@ -20,6 +20,8 @@ export const getStaticPaths = (async () => {
 const { article } = Astro.props;
 const { data, slug } = article;
 const { Content } = await article.render();
+
+export const prerender = true;
 ---
 
 <Layout
