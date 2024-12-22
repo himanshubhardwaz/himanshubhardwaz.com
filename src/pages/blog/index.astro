@@ -7,6 +7,8 @@ import BaseLayout from "~/layouts/Layout.astro";
 const articles = (await getCollection("posts")).sort((a, b) =>
   +a.data.date < +b.data.date ? 1 : -1
 );
+
+export const prerender = true;
 ---
 
 <BaseLayout
