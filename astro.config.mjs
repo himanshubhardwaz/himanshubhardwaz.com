@@ -45,7 +45,7 @@ export default defineConfig({
     },
   },
   adapter: cloudflare({
-    imageService: "cloudflare",
+    imageService: "passthrough",
   }),
   integrations: [tailwind(), mdx(), sitemap()],
   markdown: {
