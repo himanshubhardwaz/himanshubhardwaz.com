@@ -44,7 +44,9 @@ export default defineConfig({
       }),
     },
   },
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    imageService: "cloudflare",
+  }),
   integrations: [tailwind(), mdx(), sitemap()],
   markdown: {
     shikiConfig: {
