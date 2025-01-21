@@ -5,6 +5,8 @@ import sitemap from "@astrojs/sitemap";
 import cloudflare from "@astrojs/cloudflare";
 import dotenv from "dotenv";
 
+import react from "@astrojs/react";
+
 dotenv.config();
 
 export default defineConfig({
@@ -47,7 +49,9 @@ export default defineConfig({
   adapter: cloudflare({
     imageService: "passthrough",
   }),
-  integrations: [tailwind(), mdx(), sitemap()],
+  integrations: [tailwind({
+    applyBaseStyles: false,
+  }), mdx(), sitemap(), react()],
   markdown: {
     shikiConfig: {
       experimentalThemes: {
