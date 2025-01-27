@@ -45,7 +45,9 @@ export default defineConfig({
       }),
     },
   },
-  adapter: vercel(),
+  adapter: vercel({
+    imageService: true,
+  }),
   integrations: [tailwind(), mdx(), sitemap()],
   markdown: {
     shikiConfig: {
