@@ -2,8 +2,9 @@ import { defineConfig, envField } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import cloudflare from "@astrojs/cloudflare";
 import dotenv from "dotenv";
+
+import vercel from "@astrojs/vercel";
 
 dotenv.config();
 
@@ -44,9 +45,7 @@ export default defineConfig({
       }),
     },
   },
-  adapter: cloudflare({
-    imageService: "passthrough",
-  }),
+  adapter: vercel(),
   integrations: [tailwind(), mdx(), sitemap()],
   markdown: {
     shikiConfig: {
