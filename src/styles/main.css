@@ -1,6 +1,6 @@
 :root {
     --color-bg: theme(colors.gray.50);
-    --color-bg-subtle: theme(colors.gray.100);
+    --color-bg-subtle: theme(colors.gray.800);
     --color-border: theme(colors.gray.200);
     --color-text: theme(colors.gray.950);
     --color-text-subtle: theme(colors.gray.600);
