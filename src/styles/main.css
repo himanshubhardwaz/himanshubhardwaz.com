@@ -8,7 +8,7 @@
   
   @media (prefers-color-scheme: dark) {
     :root {
-      --color-bg: theme(colors.gray.900);
+      --color-bg: theme(colors.gray.950);
       --color-bg-subtle: theme(colors.gray.800);
       --color-border: theme(colors.gray.700);
       --color-text: theme(colors.gray.50);
