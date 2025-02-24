@@ -72,5 +72,5 @@ export async function GET(context: APIContext): Promise<Response> {
 
   setSessionTokenCookie(context, sessionToken, session.expiresAt);
 
-  return context.redirect("/");
+  return context.redirect("/?login=true");
 }

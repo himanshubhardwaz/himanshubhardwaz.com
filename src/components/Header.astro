@@ -1,7 +1,7 @@
 ---
 import Button from "./Button.astro";
 import logo from "~/assets/logo.png";
-import LoginOrLogoutButton from "./LoginOrLogoutButton.astro";
+// import LoginOrLogoutButton from "./LoginOrLogoutButton.astro";
 ---
 
 <script>
@@ -41,9 +41,14 @@ import LoginOrLogoutButton from "./LoginOrLogoutButton.astro";
   </a>
   <div class="items-center flex space-x-2">
     <Button href="/blog">Articles</Button>
-    <LoginOrLogoutButton server:defer>
+    <Button
+      href="https://himanshubhardwaz.github.io/resume/Himanshu's_Resume.pdf"
+      target="_blank"
+      rel="noopener noreferrer">Resume</Button
+    >
+    <!-- <LoginOrLogoutButton server:defer>
       <Button id="login" href="/login" slot="fallback">Login</Button>
-    </LoginOrLogoutButton>
+    </LoginOrLogoutButton> -->
   </div>
 </header>
 
