@@ -14,7 +14,7 @@ export async function GET(context: APIContext) {
     items: blogs.map((post) => ({
       ...post.data,
       pubDate: post.data.date,
-      link: `/blog/${post.slug}/`,
+      link: `https://blog.himanshubhardwaz.com/blog/${post.slug}/`,
     })),
     customData: `<language>en-us</language>`,
   });
